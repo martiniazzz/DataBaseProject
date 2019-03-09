@@ -1,0 +1,83 @@
+.footer{
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 75px;
+    background-color: cornflowerblue;
+}
+
+.account{
+    margin: 5px;
+    padding: 3px;
+    float: right;
+}
+
+.account-name{
+    padding: 3px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.container{
+    margin-top: 100px;
+}
+
+.content{
+}
+
+.navigator{
+    background-color: gainsboro;
+}
+
+.content-inner{
+    display: block;
+    padding: 20px;
+    width: 80%;
+    background-color: #48698f;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.entity{
+    text-align: center;
+}
+
+.entity-active{
+    color: black;
+}
+
+a:link, a:visited {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+a:hover, a:active {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.table-holder{
+    display: block;
+    width: 80%;
+    padding-top: 20px;
+}
+
+.table-header{
+    background-color: #48698f;
+    color: white;
+}
+
+.center {
+    margin: auto;
+    width: 60%;
+    padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.hideform {
+    display: none;
+}
