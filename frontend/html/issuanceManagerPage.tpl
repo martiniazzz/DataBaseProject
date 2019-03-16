@@ -1,22 +1,12 @@
-<html>
-<head>
-    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
-    <title>Кабінет</title>
-    <link href="../../frontend/css/respRepsonCSS.css" rel="stylesheet" type="text/css"/>
-
-    <script type="text/javascript" src="../../frontend/assets/libs/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="../../frontend/js/respPersonPage.js"></script>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-</head>
-<body>
+{include "../../frontend/html/header.tpl"}
 <div class="page-holder">
-    <div class="footer">
+    <div class="header">
         <div class="account">
             <div class="account-name">
                 {$managerName}
+            </div>
+            <div class="account-exit">
+                <a href="logout.php">Вийти</a>
             </div>
             <div class="account-giving">
                 <a href="mainManagerPage.php">На головну</a>
@@ -69,5 +59,4 @@
         </div>
     </div>
 </div>
-</body>
-</html>
+{include "../../frontend/html/footer.tpl"}

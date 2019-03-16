@@ -1,11 +1,21 @@
-.footer{
-    margin: 0 auto;
-    position: absolute;
+.header{
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    z-index: 15;
     height: 75px;
-    background-color: cornflowerblue;
+    border-bottom: 1px solid #c9c6c6;
+    background-color: #e2dfdf;
+    -webkit-box-shadow: -2px 10px 33px -8px rgba(0,0,0,0.3);
+    -moz-box-shadow: -2px 10px 33px -8px rgba(0,0,0,0.3);
+    box-shadow: -2px 10px 33px -8px rgba(0,0,0,0.3);
+    font-weight: bold;
+    color: #4b4b4b;
+}
+
+a:active {
+    color: #4b4b4b;
 }
 
 .account{
@@ -16,7 +26,6 @@
 
 .account-name{
     padding: 3px;
-    color: white;
     font-weight: bold;
     font-size: 20px;
 }
@@ -29,6 +38,7 @@
     font-weight: bold;
     font-size: 15px;
 }
+
 .account-exit{
     display: block;
     float: right;
@@ -72,8 +82,10 @@
 
 .table-header{
     display: flex;
-    background-color: #48698f;
-    color: white;
+    color: #4b4b4b;
+    font-weight: bold;
+    border: 1px solid #c9c6c6;
+    background-color: #e2dfdf;
 }
 
 .border-shadow{
@@ -112,7 +124,9 @@
 
 .table-row{
     display: flex;
-    border: 1px solid rgba(199,199,199,1);
+    border-bottom: 1px solid rgba(199,199,199,1);
+    border-right: 1px solid rgba(199,199,199,1);
+    border-left: 1px solid rgba(199,199,199,1);
 }
 
 .table-cell{
@@ -164,7 +178,10 @@
 .get-more-title{
     padding: 10px;
     font-size: 20px;
-    background-color: #87bfff;
+    border: 1px solid #c9c6c6;
+    background-color: #e2dfdf;
+    color: #4b4b4b;
+    font-weight: bold;
 }
 
 .get-more-cont{
@@ -199,7 +216,10 @@
     margin-top: 20px;
     padding: 10px;
     font-size: 20px;
-    background-color: #87bfff;
+    border: 1px solid #c9c6c6;
+    background-color: #e2dfdf;
+    color: #4b4b4b;
+    font-weight: bold;
 }
 
 #giving-cont{

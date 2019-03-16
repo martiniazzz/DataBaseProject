@@ -1,65 +1,46 @@
-<html>
-<head>
-    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
-    <title>Менеджер</title>
-    <link href="../../frontend/css/managerPageCSS.css" rel="stylesheet" type="text/css"/>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-</head>
-<body>
+{include "../../frontend/html/header.tpl"}
 <div class="page-holder">
-    <div class="footer">
-        <div class="account">
-            <div class="account-name">
-                {$managerName}
-            </div>
-            <div>
-                <a href="logout.php">Вийти</a>
-            </div>
-            <div>
-                <a href="mainManagerPage.php">На головну</a>
-            </div>
-        </div>
-    </div>
-    <div class="container row">
-        <div class="content col-md-10">
+    {include "../../frontend/html/managerHeader.tpl"}
+    <div class="content row">
+        <div class="content-inner col-md-8">
             <div class="table-holder">
                 <div class="row table-header border-shadow">
-                    {foreach from=$header_vals item=h}
-                        <div class="col-md-1">{$h}</div>
-                    {/foreach}
+                    <div class="col-md-6 table-header-cell">Назва</div>
+                    <div class="col-md-3 table-header-cell"></div>
+                    <div class="col-md-3 table-header-cell"></div>
                 </div>
                 <div class="table-content">
                     {foreach from=$prov_vals item=v}
-                        <div>{$v->toString()}</div>
-                        <button id="update_prov" onclick="pass_values({$v->getId()},'{$v->getName()}','{$v->getCountry()}','{$v->getCity()}','{$v->getStreet()}','{$v->getBuildNo()}','{$v->getAccount()}','{$v->getEmail()}')">Update</button>
-                        <form method="post" action="providersManagerPage.php" onsubmit="return sub_delete()">
-                            <input class="del_id" type="number" name="id" value="{$v->getId()}">
-                            <button type="submit" name="delete_prov">Delete</button>
-                        </form>
+                        <div class="row table-row">
+                            <div class="col-md-6 table-cell">{$v->getName()}</div>
+                            <div class="table-cell col-md-3">
+                                <button id="update_prov" class="edit-btn" onclick="pass_values({$v->getId()},'{$v->getName()}','{$v->getCountry()}','{$v->getCity()}','{$v->getStreet()}','{$v->getBuildNo()}','{$v->getAccount()}','{$v->getEmail()}')">Редагувати</button>
+                            </div>
+                            <form class="col-md-3 table-cell" method="post" action="providersManagerPage.php" onsubmit="return sub_delete()">
+                                <input class="del_id" type="number" name="id" value="{$v->getId()}">
+                                <button class="delete-btn" type="submit" name="delete_prov">Видалити</button>
+                            </form>
+                        </div>
                     {/foreach}
                 </div>
             </div>
         </div>
-        <div class="navigator col-md-2">
+        <div class="table-navigation col-md-4">
             <div id="update_prov_div" class="center">
-                <button id="close" style="float: right;">X</button>
-                <form method="post" action="providersManagerPage.php">
-                    <input id="up_name" type="text" name="name" placeholder="Company">
-                    <input id="up_co" type="text" name="country" placeholder="Country">
-                    <input id="up_ci" type="text" name="city" placeholder="City">
-                    <input id="up_st" type="text" name="street" placeholder="Street">
-                    <input id="up_bu" type="text" name="build" placeholder="Build">
-                    <input id="up_ac" type="text" name="account" placeholder="Account">
-                    <input id="up_em" type="text" name="email" placeholder="Email">
-                    <input id="up_id" type="number" name="id" placeholder="id">
-                    <input id="up_sub" type="submit" name="submit_add" value="Додати">
+                <form method="post" action="providersManagerPage.php" id="form">
+                    <input id="up_name" class="input-holder" type="text" name="name" placeholder="Company">
+                    <input id="up_co" class="input-holder" type="text" name="country" placeholder="Country">
+                    <input id="up_ci" class="input-holder" type="text" name="city" placeholder="City">
+                    <input id="up_st" class="input-holder" type="text" name="street" placeholder="Street">
+                    <input id="up_bu" class="input-holder" type="text" name="build" placeholder="Build">
+                    <input id="up_ac" class="input-holder" type="text" name="account" placeholder="Account">
+                    <input id="up_em" class="input-holder" type="text" name="email" placeholder="Email">
+                    <input id="up_id" class="input-holder" type="number" name="id" placeholder="id">
+                    <input id="up_sub" class="add-btn" type="submit" name="submit_add" value="Додати">
+                    <input id="close" onclick="clear_btn()" type="reset" class="delete-btn clear-btn" value="&times;">
                 </form>
             </div>
         </div>
     </div>
 </div>
-</body>
-<script type="text/javascript" src="../../frontend/assets/libs/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../../frontend/js/managerPage.js"></script>
-</html>
+{include "../../frontend/html/footer.tpl"}

@@ -10,8 +10,8 @@ $pdo->exec($sql);
 
 //$xusernames = ["sm1001","rp2001","rp2002","rp2003"];
 //$xpasswords = ["passdef01","passdef02","passdef03","passdef04"];
-//
-//for($i = 0; $i<5; $i++){
+////
+//for($i = 0; $i<4; $i++){
 //    $hash = password_hash($xpasswords[$i], PASSWORD_DEFAULT);
 //    $sql_ins =  $pdo->prepare("INSERT INTO users (idUser, password) VALUES (:xusername, :xpassword)");
 //    $sql_ins->execute(array(':xusername' => $xusernames[$i],':xpassword' => $hash));

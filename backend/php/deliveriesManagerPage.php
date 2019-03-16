@@ -12,7 +12,6 @@ $smarty = new Smarty;
 
 $smarty->assign("managerName",$_SESSION["name"]);
 
-$headers = [];
 $deliveries = [];
 
 $sql = "SELECT * FROM deliveries";
@@ -20,8 +19,6 @@ DeliveryDAO::eagerInit($sql);
 $deliveries = DeliveryDAO::getDeliveries();
 $headers = DeliveryDAO::getHeaders();
 
-
-$smarty->assign("header_vals",$headers);
 $smarty->assign("del_vals",$deliveries);
 
 $smarty->display("../../frontend/html/deliveriesManagerPage.tpl");

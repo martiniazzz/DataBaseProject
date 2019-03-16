@@ -1,7 +1,8 @@
 document.getElementById("giving-cont").innerText = "";
 JSON.parse(sessionStorage.getItem("givingList") || "[]").forEach(function (elem){
-    if(elem !== null && elem.c !== 0)
-        document.getElementById("giving-cont").innerText += elem.n + "  " +elem.c + "\n";
+    if(elem !== null && elem.c !== 0) {
+        document.getElementById("giving-cont").innerText += elem.n + " - " + elem.c + "\n";
+    }
 });
 
 function showInfo(text) {

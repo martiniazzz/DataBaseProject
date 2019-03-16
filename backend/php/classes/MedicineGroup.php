@@ -150,7 +150,16 @@ class MedicineGroup
     }
 
     public function toString(){
-        return $this->id.'  '.$this->storageUnitAmount;
+        $res = '';
+        $res .= 'Номер групи: '.$this->id.'\n';
+        $res .= 'Стелаж: '.$this->rack.'\n';
+        $res .= 'Полиця: '.$this->shelf.'\n';
+        $res .= 'Дата виготовлення: '.$this->productDate.'\n';
+        $res .= 'Придатний до: '.$this->dueTo.'\n';
+        $res .= 'Кількість: '.$this->storageUnitAmount.'\n';
+        $st = $this->isFinished?'Закінчено':'Наявний'.'\n';
+        $res .= 'Статус: '.$st.'\n';
+        return $res;
     }
 
 }

@@ -1,16 +1,6 @@
-<html>
-<head>
-    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
-    <title>Кабінет</title>
-    <link href="../../frontend/css/respRepsonCSS.css" rel="stylesheet" type="text/css"/>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-</head>
-<body>
+{include "../../frontend/html/header.tpl"}
 <div class="page-holder">
-    <div class="footer">
+    <div class="header">
         <div class="account">
             <div class="account-name">
                 {$respPersonName}
@@ -27,15 +17,15 @@
         <div class="content-inner col-md-8">
             <div class="input-container">
                 <form method="post" action="respPersonPage.php" name="form" accept-charset="UTF-8">
-                    <input class="input-field" name="prefix" value="{$input_val}">
-                    <button name="submit_btn" type="submit" class="input-btn">Search</button>
+                    <input  id="search-input" class="input-field" name="prefix" value="{$input_val}">
+                    <button id="input-btn" name="submit_btn" type="submit" class="input-btn">Search</button>
                 </form>
             </div>
             <div class="table-holder">
                 <div class="table-header border-shadow">
                     <div class="table-header-name table-header-cell">Назва</div>
-                    <div class="table-header-type table-header-cell">Тип одиниці</div>
-                    <div class="table-header-amount table-header-cell">Кількість</div>
+                    <div class="table-header-type table-header-cell">Тип</div>
+                    <div class="table-header-amount table-header-cell">Доступна кількість</div>
                     <div class="table-header-more table-header-cell">
 
                     </div>
@@ -64,7 +54,7 @@
         </div>
         <div class="table-navigation col-md-4">
             <div>
-                <div class="get-more-title">More info</div>
+                <div class="get-more-title">Інформація</div>
                 <div id="info-holder" class="get-more-cont border-shadow">
                 </div>
             </div>
@@ -83,7 +73,4 @@
         </div>
     </div>
 </div>
-</body>
-<script type="text/javascript" src="../assets/libs/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../js/respPersonPage.js"></script>
-</html>
+{include "../../frontend/html/footer.tpl"}

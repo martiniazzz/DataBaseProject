@@ -63,9 +63,4 @@ class Delivery
     {
         return $this->idman;
     }
-
-    public function toString()
-    {
-        return $this->date."      ".$this->total."      ".$this->idprov."     ". $this->idman;
-    }
 }

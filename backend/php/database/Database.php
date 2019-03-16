@@ -4,7 +4,7 @@ class Database {
 
     private static $servername = "localhost";
     private static $username = "root";
-    private static $password = "sqlweb";
+    private static $password = "";
     private static $dbname = "med_storage";
     private static $pdo = null;
 

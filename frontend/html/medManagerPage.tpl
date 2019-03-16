@@ -1,16 +1,6 @@
-<html>
-<head>
-    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
-    <title>Кабінет</title>
-    <link href="../../frontend/css/respRepsonCSS.css" rel="stylesheet" type="text/css"/>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-</head>
-<body>
+{include "../../frontend/html/header.tpl"}
 <div class="page-holder">
-    <div class="footer">
+    <div class="header">
         <div class="account">
             <div class="account-name">
                 {$managerName}
@@ -18,7 +8,7 @@
             <div class="account-exit">
                 <a href="logout.php">Вийти</a>
             </div>
-            <div>
+            <div class="account-giving">
                 <a href="mainManagerPage.php">На головну</a>
             </div>
         </div>
@@ -37,7 +27,6 @@
                     <div class="table-header-type table-header-cell">Тип одиниці</div>
                     <div class="table-header-amount table-header-cell">Кількість</div>
                     <div class="table-header-more table-header-cell">
-
                     </div>
                 </div>
                 <div class="table-content">
@@ -48,29 +37,26 @@
                             </div>
                             <div class="table-cell-type table-cell">{$m->getUnitType()}</div>
                             <div class="table-cell-amount table-cell">{$m->getStorageAmount()}</div>
-                            <button onclick="showInfo('{$m->getProducer()} \n {$m->getDesc()}')" class="table-cell-more table-cell more-info-btn">і</button>
-                            <button onclick="showGroups('{$m->getGroups()}')" class="table-cell-more table-cell more-info-btn">і</button>
+                            <button onclick="showInfo('{$m->getProducer()} \n {$m->getDesc()}');showGroups('{$m->getGroups()}');" class="table-cell-more table-cell more-info-btn">і</button>
                          </div>
                     {/foreach}
                 </div>
             </div>
         </div>
-        <div class="table-navigation col-md-4">
-            <div>
-                <div class="get-more-title">More info</div>
-                <div id="info-holder" class="get-more-cont border-shadow">
+        <div class="nav col-md-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="get-more-title">Інформація</div>
+                    <div id="info-holder" class="get-more-cont border-shadow">
+                    </div>
                 </div>
-            </div>
-            <div>
-                <div class="get-more-title">Groups</div>
-                <div id="groups-holder" class="get-more-cont border-shadow">
+                <div class="col-md-6">
+                    <div class="get-more-title">Групи</div>
+                    <div id="groups-holder" class="get-more-cont border-shadow">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</body>
-<script type="text/javascript" src="../assets/libs/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../js/respPersonPage.js"></script>
-<script type="text/javascript" src="../js/managerPage.js"></script>
-</html>
+{include "../../frontend/html/footer.tpl"}
