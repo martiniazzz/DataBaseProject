@@ -16,18 +16,19 @@ $smarty->assign("managerName",$_SESSION["name"]);
 
 $deliveries = [];
 $provs = [];
-//if(isset($_POST["submit_add"])){
-//    $id = $_POST["date"];
-//    $name = $_POST["name"];
-//
-//    $pdo =  Database::connect();
-//    $sql = "INSERT INTO de (companyName,country,sity,street,buildNo,account,email) VALUES (?,?,?,?,?,?,?);";
-//    $stmt= $pdo->prepare($sql);
-//    $stmt->execute([$name, $country, $city,$street,$build,$account,$email]);
-//    Database::disconnect();
-//
-//    header('location:providersManagerPage.php');
-//}
+if(isset($_POST["submit_add"])){
+    $id = $_POST["id"];
+    $date = $_POST["date"];
+    $name = $_POST["name"];
+
+    $pdo =  Database::connect();
+    $sql = "INSERT INTO deliveries (idDelivery,deliverDate,idProvider,idManager) VALUES (?,?,?,?);";
+    $stmt= $pdo->prepare($sql);
+    $stmt->execute([$id, $date, $name,$_SESSION["username"]]);
+    Database::disconnect();
+
+    header('location:providersManagerPage.php');
+}
 if(isset($_POST["sort_by_date"])){
     $sql = "SELECT * FROM deliveries ORDER BY deliverDate DESC ;";
     DeliveryDAO::eagerInit($sql);
@@ -37,22 +38,25 @@ if(isset($_POST["sort_by_date"])){
     ProviderDAO::eagerInit($sqlp);
     $provs = ProviderDAO::getProviders();
 }
-//else if(isset($_POST["search_provs"])){
-//    $name = $_POST["provss"];
-////    $sql = "SELECT idProvider FROM providers WHERE companyName='".$name."'";
-////    $id = "";
-////    foreach ($pdo->query($sql) as $row){
-////        $id = $row["idProvider"];
-////    }
-//
-//    $sql = "SELECT * FROM deliveries WHERE idDelivery='".$name."';";
-//    DeliveryDAO::eagerInit($sql);
-//    $deliveries = DeliveryDAO::getDeliveries();
-//
-//    $sqlp = "SELECT * FROM providers";
-//    ProviderDAO::eagerInit($sqlp);
-//    $provs = ProviderDAO::getProviders();
-//}
+else if(isset($_POST["search_provs"])){
+    $name = $_POST["provss"];
+    $pdo = Database::connect();
+    $sql = "SELECT idProvider FROM providers WHERE companyName='".$name."'";
+    $id = "";
+    foreach ($pdo->query($sql) as $row){
+        $id = $row["idProvider"];
+    }
+
+    $sql = "SELECT * FROM deliveries WHERE idProvider='".$id."';";
+    DeliveryDAO::eagerInit($sql);
+    $deliveries = DeliveryDAO::getDeliveries();
+
+    $sqlp = "SELECT * FROM providers";
+    ProviderDAO::eagerInit($sqlp);
+    $provs = ProviderDAO::getProviders();
+
+    Database::disconnect();
+}
 else if(isset($_POST["price_search"])){
     $pfrom = $_POST["p_from"];
     $pto = $_POST["p_to"];
@@ -93,6 +97,10 @@ else if(isset($_POST["submit_update_del"])){
 
     header('location:deliveriesManagerPage.php');
 }
+else if(isset($_POST["add_group"])){
+    $_SESSION['groupdel'] = $_POST["delid"];
+    header('location:addGroupsManagerPage.php');
+}
 else{
     $sql = "SELECT * FROM deliveries";
     DeliveryDAO::eagerInit($sql);
@@ -105,5 +113,6 @@ else{
 
 $smarty->assign("del_vals",$deliveries);
 $smarty->assign("provs_list",$provs);
+$smarty->assign("provs_list_inp",$provs);
 
 $smarty->display("../../frontend/html/deliveriesManagerPage.tpl");

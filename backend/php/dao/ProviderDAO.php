@@ -10,7 +10,6 @@ class ProviderDAO
 {
 
     static private $providers;
-    static private $headers;
 
     static public function eagerInit($sql) {
         $pdo = Database::connect();
@@ -32,17 +31,11 @@ class ProviderDAO
             self::$providers[] = new Provider($id,$name,$country,$city,$street,$buildNo,$account,$email,$phones);
         }
 
-        self::$headers = ["idProvider","companyName","country","city","street","buildNo","account","email","phones"];
-
         Database::disconnect();
     }
 
     static public function getProviders() {
         return self::$providers;
-    }
-
-    static public function getHeaders(){
-        return self::$headers;
     }
 
 }

@@ -258,16 +258,23 @@ a:active {
     display: flex;
 }
 
+.prov-a{
+    flex:15%;
+    margin: 3px;
+}
+
 .prov-n{
-    flex: 70%;
+    flex: 55%;
     text-align: left;
 }
 
 .prov-e{
     flex: 15%;
+    margin: 3px;
 }
 
 .prov-d{
+    margin-top: -5px;
     flex: 15%;
     display: flex;
     align-items: center;
@@ -333,4 +340,41 @@ a:active {
 
 #depart{
     display: none;
+}
+
+.phone_holder{
+    border-bottom: 1px solid #cccccc;
+    display: flex;
+    width: 180px;
+}
+
+.phone_holder_inner{
+    flex: 50%;
+}
+
+.deliv_head{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.deliv_holder{
+    margin: 10px auto;
+    width: 70%;
+
+}
+
+.deliv_inner{
+    width: 100%;
+    margin: 5px auto;
+    padding: 10px;
+    border: 1px solid #b3b3b3;
+    border-radius: 5px;
+}
+
+.deliv_inner-inner{
+
 }

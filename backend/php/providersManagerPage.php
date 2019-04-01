@@ -21,7 +21,6 @@ if(isset($_POST["sort_by_name"])){
     $sql = "SELECT * FROM providers ORDER BY companyName;";
     ProviderDAO::eagerInit($sql);
     $providers = ProviderDAO::getProviders();
-    $headers = ProviderDAO::getHeaders();
 
     CitiesAndCountriesDAO::eagerInit();
     $cities = CitiesAndCountriesDAO::getCities();
@@ -94,11 +93,33 @@ else if(isset($_POST["delete_prov"])){
 
     header('location:providersManagerPage.php');
 }
+else if(isset($_POST["add_phone_b"])){
+    $id = $_POST["provid"];
+    $p = $_POST["phoneval"];
+
+    $pdo =  Database::connect();
+    $sql = "INSERT INTO phones (phone,idProvider) VALUES (?,?);";
+    $stmt= $pdo->prepare($sql);
+    $stmt->execute([$p,$id]);
+    Database::disconnect();
+
+    header('location:providersManagerPage.php');
+}
+else if(isset($_POST["del_phone"])){
+    $phone= $_POST["pval"];
+
+    $pdo =  Database::connect();
+    $sql = "DELETE FROM phones WHERE phone=?;";
+    $stmt= $pdo->prepare($sql);
+    $stmt->execute([$phone]);
+    Database::disconnect();
+
+    header('location:providersManagerPage.php');
+}
 else{
     $sql = "SELECT * FROM providers";
     ProviderDAO::eagerInit($sql);
     $providers = ProviderDAO::getProviders();
-    $headers = ProviderDAO::getHeaders();
 
     CitiesAndCountriesDAO::eagerInit();
     $cities = CitiesAndCountriesDAO::getCities();

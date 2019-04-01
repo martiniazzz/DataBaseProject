@@ -9,7 +9,7 @@ class TablesUpdate
         $sql = "SELECT idGroup, delPackAmount, unitAmount, pricePerPack 
                 FROM medicinegroups INNER JOIN medicines ON medicines.idMedicine = medicinegroups.idMedicine;";
         foreach ($pdo->query($sql) as $v){
-            $deliv = $v["delPackAmount"];
+            $deliv = $v["delPackAmount"]*$v["unitAmount"];
             $giv = 0;
             $off = 0;
             $sqlg = "SELECT * FROM givenmed WHERE idGroup='".$v["idGroup"]."';";
