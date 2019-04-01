@@ -22,21 +22,6 @@ class MedicineGroup
     private $idMedicine;
     private $idDelivery;
 
-    /**
-     * MedicineGroup constructor.
-     * @param $id
-     * @param $shelf
-     * @param $rack
-     * @param $productDate
-     * @param $dueTo
-     * @param $delPackAmount
-     * @param $storageUnitAmount
-     * @param $pricePerPack
-     * @param $totalPrice
-     * @param $isFinished
-     * @param $idMedicine
-     * @param $idDelivery
-     */
     public function __construct($id, $shelf, $rack, $productDate, $dueTo, $delPackAmount, $storageUnitAmount, $pricePerPack, $totalPrice, $isFinished, $idMedicine, $idDelivery)
     {
         $this->id = $id;

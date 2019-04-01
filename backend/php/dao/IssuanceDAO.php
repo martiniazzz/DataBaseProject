@@ -16,11 +16,21 @@ class IssuanceDAO
             $sqli = "SELECT medName, amount
                      FROM (givenmed INNER JOIN medicinegroups ON givenmed.idGroup = medicinegroups.idGroup) INNER JOIN medicines ON medicines.idMedicine = medicinegroups.idMedicine
                      WHERE idIssuance='".$id."';";
-            $m = "";
+            $m = [];
             foreach ($pdo->query($sqli) as $giv) {
-                $m .= 'Найменування: '.$giv["medName"].'\nКількість: '.$giv["amount"].'\n\n';
+                $m[] = new GivenMed($giv["medName"],$giv["amount"]);
             }
-            self::$issuance[] = new Issuance($id,$date,$status,$manager,$respPerson,$m);
+            $sqli = "SELECT lastName, firstName, midName FROM storagemanagers WHERE idManager='".$manager."';";
+            foreach ($pdo->query($sqli) as $row) {
+                $manager = $row["lastName"]." ".$row["firstName"]." ".$row["midName"];
+            }
+            $sqli = "SELECT department, lastName, firstName, midName FROM responsiblepersons WHERE idRespPerson='".$respPerson."';";
+            $depart = "";
+            foreach ($pdo->query($sqli) as $row) {
+                $respPerson = $row["lastName"]." ".$row["firstName"]." ".$row["midName"];
+                $depart = $row["department"];
+            }
+            self::$issuance[] = new Issuance($id,$date,$status,$manager,$respPerson,$m,$depart);
         }
 
         Database::disconnect();

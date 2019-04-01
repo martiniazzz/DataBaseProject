@@ -21,7 +21,4 @@ foreach ($pdo->query($sql) as $v){
     $stmt->execute([$total["s"], $v["idDelivery"]]);
 }
 
-$stmt= $pdo->prepare("UPDATE medicinegroups SET totalPrice=delPackAmount*pricePerPack;");
-$stmt->execute();
-
 Database::disconnect();

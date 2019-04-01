@@ -28,9 +28,8 @@ GROUP BY medicines.idMedicine";
     $smarty->assign($table_cont,$medicine);
 }
 else{
-    $sql = "SELECT medicines.idMedicine, medName, producer, medDescript, unitType, unitAmount, storageTemp, usabilityTerm, SUM(storageUnitAmount) AS amount
-FROM medicines INNER JOIN medicinegroups ON medicines.idMedicine = medicinegroups.idMedicine
-GROUP BY medicines.idMedicine;";
+    $sql = "SELECT medicines.idMedicine, medName, producer, medDescript, unitType, unitAmount, storageTemp, usabilityTerm
+FROM medicines;";
     MedicineManagerDAO::eagerInit($sql);
     $medicine = MedicineManagerDAO::getMedicines();
 

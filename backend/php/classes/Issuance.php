@@ -8,10 +8,11 @@ class Issuance
     private $status;
     private $manager;
     private $respPerson;
+    private $depart;
 
     private $given_med;
 
-    public function __construct($id,$date,$status,$manager,$respPerson,$given_med)
+    public function __construct($id,$date,$status,$manager,$respPerson,$given_med,$depart)
     {
         $this->id = $id;
         $this->date = $date;
@@ -19,6 +20,7 @@ class Issuance
         $this->manager = $manager;
         $this->respPerson = $respPerson;
         $this->given_med = $given_med;
+        $this->depart = $depart;
     }
 
     /**
@@ -68,5 +70,15 @@ class Issuance
     {
         return $this->given_med;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDepart()
+    {
+        return $this->depart;
+    }
+
+
 
 }

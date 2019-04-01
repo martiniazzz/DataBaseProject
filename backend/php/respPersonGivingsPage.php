@@ -4,6 +4,7 @@ require "C:\Smarty\libs\Smarty.class.php";
 require "database/Database.php";
 require "dao/IssuanceDAO.php";
 require "classes/Issuance.php";
+require "classes/GivenMed.php";
 
 if(empty($_SESSION['username']))
     header('Location: home.php');
@@ -15,7 +16,17 @@ $smarty->assign("respPersonName",$_SESSION["name"]);
 $table_cont = "table_content";
 date_default_timezone_set('Europe/Kiev');
 
-if(isset($_POST['showAllG'])){
+if(isset($_POST['change_status'])){
+    $id = $_POST["iss_id"];
+    $pdo = Database::connect();
+    $sql = "UPDATE issuance SET status=? WHERE idIssuance=?";
+    $stmt= $pdo->prepare($sql);
+    $stmt->execute(["отримано", $id]);
+    Database::disconnect();
+
+    header('location:respPersonGivingsPage.php');
+}
+else if(isset($_POST['showAllG'])){
     $sql = "SELECT issuance.idIssuance, iDate, status, idManager, idRespPerson, COUNT(idGiven) AS mc, SUM(amount) AS ma
 FROM issuance INNER JOIN givenmed ON issuance.idIssuance = givenmed.idIssuance
 WHERE idRespPerson='".$_SESSION["usernameId"]."'

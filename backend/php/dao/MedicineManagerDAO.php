@@ -14,7 +14,6 @@ class MedicineManagerDAO
     static public function eagerInit($sql) {
         $pdo = Database::connect();
 
-        //$sql_sel = "SELECT * FROM medicines";
         foreach ($pdo->query($sql) as $row) {
             $id = $row["idMedicine"];
             $name = $row["medName"];
@@ -24,12 +23,20 @@ class MedicineManagerDAO
             $unitAmount = $row["unitAmount"];
             $temp = $row["storageTemp"];
             $usabilityTerm = $row["usabilityTerm"];
-            $storageAmount = $row["amount"];
-            $groups = '';
+            $storageAmount = 0;
+            $groups = "";
             $sqli = "SELECT * FROM medicinegroups WHERE idMedicine='".$id."';";
             foreach ($pdo->query($sqli) as $group){
-                $gr = new MedicineGroup($group["idGroup"],$group["shelfNo"],$group["rackNo"],$group["productDate"],$group["dueTo"],$group["delPackAmount"],$group["storageUnitAmount"],$group["pricePerPack"],$group["totalPrice"],$group["isFinished"],$id,$group["idDelivery"]);
-                $groups .= $gr->toString().'\n';
+                $storageAmount += $group["storageUnitAmount"];
+                $groups .= "Номер групи: ".$group["idGroup"]."<br>".
+                           "Стелаж: ".$group["rackNo"]."<br>".
+                           "Полиця: ".$group["shelfNo"]."<br>".
+                           "Дата виготовлення: ".$group["productDate"]."<br>".
+                           "Придатний до: ".$group["dueTo"]."<br>".
+                           "Кількість при поставці: ".$group["delPackAmount"]."<br>".
+                           "Кількість одиниць на складі: ".$group["storageUnitAmount"]."<br>".
+                           "Ціна за одиницю: ".$group["pricePerPack"]."<br>".
+                           "Вартість: ".$group["totalPrice"]."<br><br>";
             }
             self::$medicines[] = new MedicineManager($id,$name,$producer,$desc,$unitType,$unitAmount,$temp,$usabilityTerm,$storageAmount,$groups);
         }

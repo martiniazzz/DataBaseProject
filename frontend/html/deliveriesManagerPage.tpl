@@ -13,34 +13,84 @@
             </div>
         </div>
     </div>
-    <div class="content row">
-        <div class="content-inner col-md-9">
-            <div class="table-holder">
-                <div class="row table-header border-shadow">
-                    <div class="col-md-2 table-header-cell">Поставка</div>
-                    <div class="col-md-3 table-header-cell">Дата</div>
-                    <div class="col-md-2 table-header-cell">Ціна</div>
-                    <div class="col-md-3 table-header-cell">Постачальник</div>
-                    <div class="col-md-2 table-header-cell">Менеджер</div>
-                </div>
-                <div class="table-content">
-                    <div class="table-content">
-                        {foreach from=$del_vals item=v}
-                            <div class="row table-row">
-                                <div class="col-md-2 table-cell">{$v->getId()}</div>
-                                <div class="col-md-3 table-cell">{$v->getDate()}</div>
-                                <div class="col-md-2 table-cell">{$v->getTotal()}</div>
-                                <div class="col-md-3 table-cell">{$v->getIdprov()}</div>
-                                <div class="col-md-2 table-cell">{$v->getIdman()}</div>
-                            </div>
-                        {/foreach}
+    <div class="content">
+        <div class="row">
+            <div class="content-inner content-holder col-md-8">
+                <div class="search-content">
+                    <div class="filters">
+                        <div class="filters-inner">
+                            <form action="deliveriesManagerPage.php" method="post">
+                                <button class="filter-btn" name="sort_by_date">Упорядкувати за датою</button>
+                            </form>
+                        </div>
+                        <div class="filters-inner"><b>Вартість</b></div>
+                        <div class="filters-inner">
+                            <form method="post" action="deliveriesManagerPage.php">
+                                <label for="date_from">Від</label>
+                                <input class="filter-btn" type="number" name="p_from">
+                                <label for="date_to">До</label>
+                                <input class="filter-btn" type="number" name="p_to">
+                                <button type="submit" class="filter-btn" type="submit" name="price_search">Пошук</button>
+                            </form>
+                        </div>
+                        <div class="filters-inner"><b>Дата</b></div>
+                        <div class="filters-inner">
+                            <form method="post" action="deliveriesManagerPage.php">
+                                <label for="date_from">Від</label>
+                                <input class="filter-btn" type="date" name="d_from">
+                                <label for="date_to">До</label>
+                                <input class="filter-btn" type="date" name="d_to">
+                                <button type="submit" class="filter-btn" type="submit" name="date_search">Пошук</button>
+                            </form>
+                        </div>
+                        {*<div class="filters-inner">*}
+                            {*<form method="post" action="deliveriesManagerPage.php">*}
+                                {*<label for="provss">Постачальники</label>*}
+                                {*<input placeholder="Постачальники" list="providers" class="filter-btn" name="provss" onkeydown="return false;">*}
+                                {*<datalist id="providers">*}
+                                    {*{foreach from=$provs_list item=m}*}
+                                        {*<option name="{$m->getId()}" value="{$m->getName()}"></option>*}
+                                    {*{/foreach}*}
+                                {*</datalist>*}
+                                {*<button class="filter-btn" type="submit" name="search_provs">Пошук</button>*}
+                            {*</form>*}
+                        {*</div>*}
                     </div>
+                    {foreach from=$del_vals item=v}
+                        <div class="med-holder">
+                            <div class="med-name">
+                                <div class="med-name-n">Поставка №{$v->getId()} від {$v->getDate()}</div>
+                                <div class="prov-e">
+                                    <button id="update_prov" class="edit-btn" onclick="deliv_pass_values('{$v->getId()}','{$v->getDate()}','{$v->getIdprov()}')">Редагувати</button>
+                                </div>
+                            </div>
+                            <div class="med-info">
+                                <div>Вартість: {$v->getTotal()}</div>
+                                <div>Постачальник: {$v->getIdprov()}</div>
+                                <div>Отримав: {$v->getIdman()}</div>
+                                <div class="separator"></div>
+                                <div>Дані про групи: </div>
+                                <div>{$v->getGroups()}</div>
+                            </div>
+                        </div>
+                    {/foreach}
                 </div>
             </div>
-        </div>
-        <div class="table-navigation col-md-3">
-            <div id="update_prov_div" class="center">
-
+            <div class="content-inner giving-holder col-md-4">
+                <form method="post" action="deliveriesManagerPage.php" id="form">
+                    <input id="up_idp" class="input-holder" type="text" name="id" placeholder="Номер накладної">
+                    <input id="up_date" class="input-holder" type="text" name="date" placeholder="Дата">
+                    <div class="giving-content">
+                        <input id="up_prov" class="input-holder" list="provs" name="name" type="text" placeholder="Постачальник">
+                        <datalist id="provs">
+                            {foreach from=$provs_list item=m}
+                                <option name="{$m->getId()}" value="{$m->getName()}"></option>
+                            {/foreach}
+                        </datalist>
+                    </div>
+                    <input id="close" onclick="clear_btn()" type="reset" class="delete-btn clear-btn to-right" value="&times;">
+                    <button id="up_sub" class="add-btn to-right" name="submit_add">Додати</button>
+                </form>
             </div>
         </div>
     </div>

@@ -13,47 +13,34 @@
             </div>
         </div>
     </div>
-    <div class="content row">
-        <div class="content-inner col-md-8">
-            <div class="input-container">
-                <form method="post" action="medManagerPage.php" name="form" accept-charset="UTF-8">
-                    <input class="input-field" name="prefix" value="{$input_val}">
-                    <button name="submit_btn" type="submit" class="input-btn">Search</button>
-                </form>
-            </div>
-            <div class="table-holder">
-                <div class="table-header border-shadow">
-                    <div class="table-header-name table-header-cell">Назва</div>
-                    <div class="table-header-type table-header-cell">Тип одиниці</div>
-                    <div class="table-header-amount table-header-cell">Кількість</div>
-                    <div class="table-header-more table-header-cell">
-                    </div>
+    <div class="content">
+        <div class="row">
+            <div class="content-inner content-holder col-md-12">
+                <div class="search-box">
+                    <form id="form-holder" method="post" action="medManagerPage.php" name="form" accept-charset="UTF-8">
+                        <input  id="search-input" class="input-field" name="prefix" value="{$input_val}">
+                        <button id="input-btn" name="submit_btn" type="submit" class="input-btn">Пошук</button>
+                    </form>
                 </div>
-                <div class="table-content">
+                <div class="search-content">
                     {foreach from=$table_content item=m}
-                        <div class="table-row">
-                            <div class="table-cell-name table-cell">
-                                {$m->getName()}
+                        <div class="med-holder">
+                            <div class="med-name">
+                                <div class="med-name-n">{$m->getName()}</div>
+                                <div class="med-aval">Кількість: {$m->getStorageAmount()}</div>
                             </div>
-                            <div class="table-cell-type table-cell">{$m->getUnitType()}</div>
-                            <div class="table-cell-amount table-cell">{$m->getStorageAmount()}</div>
-                            <button onclick="showInfo('{$m->getProducer()} \n {$m->getDesc()}');showGroups('{$m->getGroups()}');" class="table-cell-more table-cell more-info-btn">і</button>
-                         </div>
+                            <div class="med-info">
+                                <div>Виробник: {$m->getProducer()}</div>
+                                <div>Опис: {$m->getDesc()}</div>
+                                <div>Тип видачі: {$m->getUnitType()}</div>
+                                <div class="separator"></div>
+                                <div>Групи:</div>
+                                    <div class="med-info-row">
+                                        {$m->getGroups()}
+                                    </div>
+                            </div>
+                        </div>
                     {/foreach}
-                </div>
-            </div>
-        </div>
-        <div class="nav col-md-4">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="get-more-title">Інформація</div>
-                    <div id="info-holder" class="get-more-cont border-shadow">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="get-more-title">Групи</div>
-                    <div id="groups-holder" class="get-more-cont border-shadow">
-                    </div>
                 </div>
             </div>
         </div>

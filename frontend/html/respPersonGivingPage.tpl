@@ -10,46 +10,53 @@
             </div>
         </div>
     </div>
-    <div class="content row">
-        <div class="content-inner col-md-8">
-            <div class="table-holder">
-                <div class="row table-header border-shadow">
-                    <div class="col-md-3 table-header-cell">Номер видачі</div>
-                    <div class="col-md-3 table-header-cell">Дата</div>
-                    <div class="col-md-3 table-header-cell">Статус</div>
-                    <div class="col-md-3 table-header-cell">Детальніше</div>
-                </div>
-                <div class="table-content">
-                    {foreach from=$table_content item=m}
-                        <div class="row table-row">
-                            <div class="col-md-3 table-cell">{$m->getId()}</div>
-                            <div class="col-md-3 table-cell">{$m->getDate()}</div>
-                            <div class="col-md-3 table-cell">{$m->getStatus()}</div>
-                            <button onclick="showInfo_G('{$m->getGivenMed()}')" class="col-md-3 table-cell">+</button>
-                        </div>
-                    {/foreach}
+    <div class="content">
+        <div class="row">
+            <div class="content-inner content-holder col-md-10">
+                <div class="search-content">
+                    {if $table_content == []}
+                        <div class="empty-giving-info">Видач немає</div>
+                    {else}
+                        {foreach from=$table_content item=m}
+                            <div class="med-holder">
+                                <div class="med-name">
+                                    <div class="med-name-n">Видача №{$m->getId()} від {$m->getDate()}</div>
+                                    <div class="med-aval">Статус: {$m->getStatus()}</div>
+                                    {if {$m->getStatus()} == 'опрацьовано'}
+                                        <form action="respPersonGivingsPage.php" method="post">
+                                            <input name="iss_id" value="{$m->getId()}" hidden>
+                                            <button type="submit" name="change_status" class="med-st-change edit-btn">Забрати</button>
+                                        </form>
+                                    {/if}
+                                </div>
+                                <div class="med-info">
+                                    {foreach from=$m->getGivenMed() item=g}
+                                        <div class="med-info-row">
+                                            <div>Найменування: {$g->getName()}</div>
+                                            <div>Кількість: {$g->getAmount()}</div>
+                                        </div>
+                                    {/foreach}
+                                </div>
+                            </div>
+                        {/foreach}
+                    {/if}
                 </div>
             </div>
-        </div>
-        <div class="content-inner col-md-4">
-            <div>
-                <div class="get-more-title">More info</div>
-                <div id="info-holder" class="get-more-cont border-shadow">
+            <div class="content-inner  col-md-2">
+                <div class="actions-holder">
+                <form method="post" action="respPersonGivingsPage.php">
+                <button class="giving-action-btn" name="showAllG" type="submit">Усі</button>
+                </form>
+                <form method="post" action="respPersonGivingsPage.php">
+                <button class="giving-action-btn" name="showOtrG" type="submit">Отримано</button>
+                </form>
+                <form method="post" action="respPersonGivingsPage.php">
+                <button class="giving-action-btn" name="showOprG" type="submit">Опрацьовано</button>
+                </form>
+                <form method="post" action="respPersonGivingsPage.php">
+                <button class="giving-action-btn" name="showNewG" type="submit">Нове</button>
+                </form>
                 </div>
-            </div>
-            <div class="actions-holder">
-                <form method="post" action="respPersonGivingsPage.php">
-                    <button name="showAllG" type="submit">Усі</button>
-                </form>
-                <form method="post" action="respPersonGivingsPage.php">
-                    <button name="showOtrG" type="submit">Отримано</button>
-                </form>
-                <form method="post" action="respPersonGivingsPage.php">
-                    <button name="showOprG" type="submit">Опрацьовано</button>
-                </form>
-                <form method="post" action="respPersonGivingsPage.php">
-                    <button name="showNewG" type="submit">Нове</button>
-                </form>
             </div>
         </div>
     </div>
