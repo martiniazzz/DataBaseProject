@@ -15,3 +15,11 @@ function confirmDelete() {
     return false;
 }
 
+
+function addAlert(message) {
+    $('html, body').append("<div id=\"b-alert\" class=\"alert alert-success fixed-to-r-conner hide-it\">"+ message +"</div>");
+    $("#b-alert").fadeTo(6000, 500).slideUp(500, function(){
+        $("#b-alert").slideUp(500);
+    });
+}
+

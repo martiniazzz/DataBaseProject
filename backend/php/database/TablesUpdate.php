@@ -6,7 +6,7 @@ class TablesUpdate
     static function updateMedicines(){
         $pdo = Database::connect();
 
-        $sql = "SELECT idGroup, delPackAmount, unitAmount, pricePerPack 
+        $sql = "SELECT idGroup, delPackAmount, unitAmount, pricePerPack , productDate, usabilityTerm
                 FROM medicinegroups INNER JOIN medicines ON medicines.idMedicine = medicinegroups.idMedicine;";
         foreach ($pdo->query($sql) as $v){
             $deliv = $v["delPackAmount"]*$v["unitAmount"];
@@ -23,7 +23,12 @@ class TablesUpdate
             $tot = $deliv - $giv - $off;
             $totalPrice = $deliv *  $v["pricePerPack"];
             $fin = $tot == 0 ? TRUE : FALSE;
-            $stmt= $pdo->prepare("UPDATE medicinegroups SET storageUnitAmount='".$tot."',totalPrice='".$totalPrice."',isFinished='".$fin."' WHERE idGroup='".$v["idGroup"]."';");
+
+            $prod = $v["productDate"];
+            $toadd = $v["usabilityTerm"];
+            $date = date('Y-m-d', strtotime("+".$toadd." months", strtotime($prod)));
+
+            $stmt= $pdo->prepare("UPDATE medicinegroups SET storageUnitAmount='".$tot."',totalPrice='".$totalPrice."',isFinished='".$fin."' ,dueTo='".$date."' WHERE idGroup='".$v["idGroup"]."';");
             $stmt->execute();
         }
 

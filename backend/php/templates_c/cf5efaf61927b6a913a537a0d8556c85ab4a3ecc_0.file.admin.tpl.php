@@ -5,34 +5,32 @@
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5c9f9d146ee453_10145163',
+  'unifunc' => 'content_5ca7adcf067ed3_58336974',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cf5efaf61927b6a913a537a0d8556c85ab4a3ecc' => 
     array (
       0 => 'D:\\university\\database\\databaseproject\\frontend\\html\\admin.tpl',
-      1 => 1553964188,
+      1 => 1554492877,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
     'file:../../frontend/html/header.tpl' => 1,
-    'file:../../frontend/html/footer.tpl' => 1,
   ),
 ),false)) {
-function content_5c9f9d146ee453_10145163 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ca7adcf067ed3_58336974 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:../../frontend/html/header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 <div class="page-holder">
     <div class="header">
-        <div class="account">
+        <div class="header">
+            <img id="logout-img" class="img-header" src="../../frontend/assets/images/exit.png">
+            <div class="ver-separator"></div>
             <div class="account-name">
                 Адміністратор
-            </div>
-            <div class="account-exit">
-                <a href="logout.php">Вийти</a>
             </div>
         </div>
     </div>
@@ -50,12 +48,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['m']->value) {
  : <?php echo $_smarty_tpl->tpl_vars['m']->value->toString();?>
  : <?php echo $_smarty_tpl->tpl_vars['m']->value->getDep();?>
 </div>
-                            <form action="adminPage.php" method="post" onsubmit="return confirmDelete()">
-                                <input name="id" value="<?php echo $_smarty_tpl->tpl_vars['m']->value->getId();?>
-" hidden>
-                                <button type="submit" name="delete" class="med-st-change delete-btn">Видалити</button>
-                            </form>
-                        </div>
+                                                                                                                                                </div>
                     </div>
                 <?php
 }
@@ -72,12 +65,27 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                     <input class="input-holder" type="text" name="mname" placeholder="По-батькові">
                     <input id="depart" class="input-holder" type="text" name="dep" placeholder="Відділ">
                     <input class="input-holder" type="text" name="password" placeholder="Пароль">
-                    <button class="add-btn to-right" name="submit_add">Додати</button>
+                    <button class="btn btn-success to-right" name="submit_add">Додати</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-<?php $_smarty_tpl->_subTemplateRender("file:../../frontend/html/footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
-}
+<?php echo '<script'; ?>
+ type="text/javascript" src="../../frontend/assets/libs/jquery-3.3.1.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ type="text/javascript" src="../../frontend/js/managerPage.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ type="text/javascript" src="../../frontend/js/respPersonPage.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ type="text/javascript" src="../../frontend/js/pages.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ type="text/javascript" src="../../frontend/js/managerHome.js"><?php echo '</script'; ?>
+>
+</body>
+</html><?php }
 }

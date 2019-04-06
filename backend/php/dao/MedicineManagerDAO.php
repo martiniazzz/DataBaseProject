@@ -29,15 +29,15 @@ class MedicineManagerDAO
                 $sqli = "SELECT * FROM medicinegroups WHERE idMedicine='".$id."';";
                 foreach ($pdo->query($sqli) as $group){
                     $storageAmount += $group["storageUnitAmount"];
-                    $groups .= "Номер групи: ".$group["idGroup"]."<br>".
-                        "Стелаж: ".$group["rackNo"]."<br>".
-                        "Полиця: ".$group["shelfNo"]."<br>".
-                        "Дата виготовлення: ".$group["productDate"]."<br>".
-                        "Придатний до: ".$group["dueTo"]."<br>".
-                        "Кількість при поставці: ".$group["delPackAmount"]."<br>".
-                        "Кількість одиниць на складі: ".$group["storageUnitAmount"]."<br>".
-                        "Ціна за одиницю: ".$group["pricePerPack"]."<br>".
-                        "Вартість: ".$group["totalPrice"]."<br><br>";
+                    $groups .= "Номер групи: ".$group["idGroup"]."\n".
+                        "Стелаж: ".$group["rackNo"]."\n".
+                        "Полиця: ".$group["shelfNo"]."\n".
+                        "Дата виготовлення: ".$group["productDate"]."\n".
+                        "Придатний до: ".$group["dueTo"]."\n".
+                        "Кількість при поставці: ".$group["delPackAmount"]."\n".
+                        "Кількість одиниць на складі: ".$group["storageUnitAmount"]."\n".
+                        "Ціна за одиницю: ".$group["pricePerPack"]."\n".
+                        "Вартість: ".$group["totalPrice"]."\n\n";
                 }
                 self::$medicines[] = new MedicineManager($id,$name,$producer,$desc,$unitType,$unitAmount,$temp,$usabilityTerm,$storageAmount,$groups);
             }

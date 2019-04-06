@@ -13,15 +13,17 @@ class Delivery
     private $date;
     private $total;
     private $idprov;
+    private $prov;
     private $idman;
     private $groups;
 
-    public function __construct($id, $date, $total, $idprov, $idman,$groups)
+    public function __construct($id, $date, $total, $idprov,$prov, $idman,$groups)
     {
         $this->id = $id;
         $this->date = $date;
         $this->total = $total;
         $this->idprov = $idprov;
+        $this->prov = $prov;
         $this->idman = $idman;
         $this->groups = $groups;
     }
@@ -73,6 +75,15 @@ class Delivery
     {
         return $this->groups;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getProv()
+    {
+        return $this->prov;
+    }
+
 
 
 }

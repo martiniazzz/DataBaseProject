@@ -55,7 +55,7 @@ function passForPhone(id) {
 
 function validatePhone() {
     let phone = document.getElementById("phone_holder").value;
-    document.getElementById("phone_add_phone").value = phone;
+    //document.getElementById("phone_add_phone").value = phone;
     return !(phone.length === 0);
 }
 

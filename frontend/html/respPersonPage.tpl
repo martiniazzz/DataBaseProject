@@ -1,15 +1,23 @@
-{include "../../frontend/html/header.tpl"}
+<html>
+<head>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+    <title>Кабінет</title>
+    <link href="../../frontend/css/pages.css" rel="stylesheet" type="text/css"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
 <div class="page-holder">
     <div class="header">
-        <div class="account">
+        <div class="header">
+            <img id="logout-img" class="img-header" src="../../frontend/assets/images/exit.png">
+            <div class="ver-separator"></div>
+            <img id="to-givs-img" class="img-header img-header-m" src="../../frontend/assets/images/contract.png">
+            <div class="ver-separator"></div>
             <div class="account-name">
                 {$respPersonName}
-            </div>
-            <div class="account-exit">
-                <a href="logout.php">Вийти</a>
-            </div>
-            <div class="account-giving">
-                <a href="respPersonGivingsPage.php">Мої видачі</a>
             </div>
         </div>
     </div>
@@ -17,29 +25,26 @@
         <div class="row">
             <div class="content-inner content-holder col-md-8">
                 <div class="search-box">
-                    <form id="form-holder" method="post" action="respPersonPage.php" name="form" accept-charset="UTF-8">
-                        <input  id="search-input" class="input-field" name="prefix" value="{$input_val}">
-                        <button id="input-btn" name="submit_btn" type="submit" class="input-btn">Пошук</button>
-                    </form>
-                </div>
-                <div class="search-content">
-                    {foreach from=$table_content item=m}
-                        <div class="med-holder">
-                            <div class="med-name">
-                                <div class="med-name-n">{$m->getName()}</div>
-                                <div class="med-aval">Доступно: {$m->getStorageAmount()}</div>
-                            </div>
-                            <div class="med-info">
-                                <div>Виробник: {$m->getProducer()}</div>
-                                <div>Опис: {$m->getDesc()}</div>
-                                <div>Тип видачі: {$m->getUnitType()}</div>
+                    <div>
+                        <div class="filter-toggle"><button id="toggle-filters-btn" class="btn-expand">Фільтри</button></div>
+                        <div class="filters">
+                            <div class="filters-inner">
+                                <button id="sort-by-name-btn" class="btn btn-link">Упорядкувати за назвою</button>
                             </div>
                         </div>
-                    {/foreach}
+                        <div id="form-holder">
+                            <input id="search-input" class="input-field" name="prefix">
+                            <button id="input-btn" name="submit_btn" type="submit" class="input-btn">Пошук</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="search-content">
+                    <div id="container-box" class="search-content">
+                    </div>
                 </div>
             </div>
             <div class="content-inner giving-holder col-md-4">
-                <div class="giving-title">Видача</div>
+                <div class="giving-title">Створення видачі</div>
                 <div class="separator"></div>
                 <div class="giving-content">
                     <input id="giving-search" list="medicines" name="default" placeholder="Виберіть медикамент" />
@@ -54,13 +59,33 @@
                 </div>
                 <div id="giving-inner"></div>
                 <div class="separator"></div>
-                <form method="post" action="respPersonPage.php" onsubmit="return createGiving()">
+                <form onsubmit="return false">
                     <input id="issue-data" name="dataI" value="" hidden>
-                    <button name="newIssuance" type="submit" id="giving-create">Створити</button>
+                    <button name="newIssuance" type="submit" id="giving-create" class="btn btn-success to-right">Створити</button>
                 </form>
 
             </div>
         </div>
     </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Підтвердіть створення видачі!</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="modal-btn-si">Підтвердити</button>
+                    <button type="button" class="btn btn-primary" id="modal-btn-no">&times;</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-{include "../../frontend/html/footer.tpl"}
+<script type="text/javascript" src="../../frontend/js/pages.js"></script>
+<script type="text/javascript" src="../../frontend/js/getMedicinesResp.js"></script>
+<script type="text/javascript" src="../../frontend/js/respPersonPage.js"></script>
+<script type="text/javascript" src="../../frontend/js/managerHome.js"></script>
+</body>
+</html>

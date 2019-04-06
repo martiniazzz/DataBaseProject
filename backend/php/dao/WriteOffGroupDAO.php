@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Марта
- * Date: 26.03.2019
- * Time: 18:58
- */
 
 class WriteOffGroupDAO
 {

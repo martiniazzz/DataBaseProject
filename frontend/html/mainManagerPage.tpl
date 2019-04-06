@@ -1,13 +1,10 @@
 {include "../../frontend/html/header.tpl"}
 <div class="page-holder">
     <div class="header">
-        <div class="account">
-            <div class="account-name">
-                {$managerName}
-            </div>
-            <div class="account-exit">
-                <a href="logout.php">Вийти</a>
-            </div>
+        <img id="logout-img" class="img-header" src="../../frontend/assets/images/exit.png">
+        <div class="ver-separator"></div>
+        <div class="account-name">
+            {$managerName}
         </div>
     </div>
     <div class="content">
@@ -23,4 +20,9 @@
         </div>
     </div>
 </div>
-{include "../../frontend/html/footer.tpl"}
+<script type="text/javascript" src="../../frontend/assets/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../frontend/js/managerPage.js"></script>
+<script type="text/javascript" src="../../frontend/js/pages.js"></script>
+<script type="text/javascript" src="../../frontend/js/managerHome.js"></script>
+</body>
+</html>

@@ -29,6 +29,8 @@ $('#giving-add').click(function () {
     if(b === true)
         createRow(document.getElementById("giving-inner"),med,max,name,1);
 
+    input.val('');
+    showGivings(JSON.parse(sessionStorage.getItem("givingList") || "[]"));
 });
 
 function createRow(container,med,max,name,val) {
@@ -40,6 +42,7 @@ function createRow(container,med,max,name,val) {
     let i = document.createElement("input");
     i.className = "giving-row-input";
     i.type = "number";
+    i.id = "inp-"+name;
     i.max = max;
     i.min = 1;
     i.value = val;
@@ -47,9 +50,21 @@ function createRow(container,med,max,name,val) {
     i.onkeydown = function(){
         return false;
     };
+    $(document).on("change", "#inp-"+name, function(){
+        let val = document.getElementById("inp-"+name).value;
+        changeVal(med,max,name,val);
+        showGivings(JSON.parse(sessionStorage.getItem("givingList") || "[]"));
+    });
+    let b = document.createElement("button");
+    b.innerText = "x";
+    b.className = "giving-row-delete btn btn-danger";
+    b.onclick = function(){
+        removeItem(name);
+    };
 
     d.appendChild(t);
     d.appendChild(i);
+    d.appendChild(b);
     container.appendChild(d);
 }
 //elem - med, max, name, amount
@@ -70,25 +85,22 @@ function addToJSON(med,max,name,v) {
     return b;
 }
 
-
-function createGiving() {
+function changeVal(med,max,name,v) {
     let givings = JSON.parse(sessionStorage.getItem("givingList") || "[]");
-    let d = [];
-    givings.forEach(function (elem) {
-        if(elem !== null)
-            if(elem.amount !== 0)
-                d.push({id:elem.name,amount:elem.amount});
-    });
-    if(d === undefined || d.length == 0){
-        return false;
+    if(givings[name] !== null && typeof givings[name] !== 'undefined'){
+        givings[name]["amount"]= parseInt(v);
+        if(givings[name]["amount"] > parseInt(max))
+            givings[name]["amount"]-=1;
     }
-    if (confirm("Підтвердіть створення видачі") === true) {
-        document.getElementById("issue-data").value = JSON.stringify(d);
-        sessionStorage.clear();
-        return true;
-    }
-    return false;
+    sessionStorage.setItem('givingList', JSON.stringify(givings));
 }
 
+function removeItem(id) {
+    let givings = JSON.parse(sessionStorage.getItem("givingList") || "[]");
+    givings[id] = null;
+    sessionStorage.setItem('givingList', JSON.stringify(givings));
+
+    showGivings(JSON.parse(sessionStorage.getItem("givingList") || "[]"));
+}
 
 

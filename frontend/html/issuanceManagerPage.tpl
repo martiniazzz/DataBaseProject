@@ -1,109 +1,64 @@
 {include "../../frontend/html/header.tpl"}
 <div class="page-holder">
-    <div class="header">
-        <div class="account">
-            <div class="account-name">
-                {$managerName}
-            </div>
-            <div class="account-exit">
-                <a href="logout.php">Вийти</a>
-            </div>
-            <div class="account-giving">
-                <a href="mainManagerPage.php">На головну</a>
-            </div>
-        </div>
-    </div>
+    {include "../../frontend/html/managerHeader.tpl"}
     <div class="content">
         <div class="row">
-            <div class="content-inner content-holder col-md-10">
-                <div class="search-content">
-                    <div class="filters">
-                        <div class="filters-inner">
-                            <form method="post" action="issuanceManagerPage.php">
-                                <button type="submit" class="filter-btn" name="order_date">Впорядкувати за датою</button>
-                            </form>
-                        </div>
-                        <div class="filters-inner">
-                            <form method="post" action="issuanceManagerPage.php">
-                                <label for="date_from">Від</label>
-                                <input class="filter-btn" type="date" name="date_from">
-                                <label for="date_to">До</label>
-                                <input class="filter-btn" type="date" name="date_to">
-                                <button type="submit" class="filter-btn" type="submit" name="date_search">Пошук</button>
-                            </form>
-                        </div>
-                        <div class="filters-inner">
-                            <form method="post" action="issuanceManagerPage.php">
-                                <label for="resppersonsInp">Відповідальні особи</label>
-                                <input placeholder="Відповідальні особи" list="resppersons" class="filter-btn" name="resppersonsInp" onkeydown="return false;">
-                                <datalist id="resppersons">
-                                    {foreach from=$resppersons item=m}
-                                        <option name="{$m[1]}" value="{$m[0]}"></option>
-                                    {/foreach}
-                                </datalist>
-                                <button class="filter-btn" type="submit" name="search_resp_p">Пошук</button>
-                            </form>
-                        </div>
-                        <div class="filters-inner">
-                            <form method="post" action="issuanceManagerPage.php">
-                                <label for="managerInp">Відділення</label>
-                                <input placeholder="Відділення" list="departs" class="filter-btn" name="departInp" onkeydown="return false;">
-                                <datalist id="departs">
-                                    {foreach from=$departs item=m}
-                                        <option name="{$m}" value="{$m}"></option>
-                                    {/foreach}
-                                </datalist>
-                                <button class="filter-btn" type="submit" name="search_depart">Пошук</button>
-                            </form>
+            <div class="content-inner content-holder col-md-12">
+                <div class="search-box">
+                    <div>
+                        <div class="filter-toggle"><button id="toggle-filters-btn" class="btn-expand">Фільтри</button></div>
+                        <div class="filters">
+                            <div class="filters-inner">
+                                <button id="b-get-all" class="btn btn-success margin-around" name="showAllG" type="submit">Усі</button>
+                                <button id="b-get-get"  class="btn btn-success margin-around" name="showOtrG" type="submit">Отримано</button>
+                                <button id="b-get-proc"  class="btn btn-success margin-around" name="showOprG" type="submit">Опрацьовано</button>
+                                <button id="b-get-new"  class="btn btn-success margin-around" name="showNewG" type="submit">Нове</button>
+                            </div>
+
+                            <div class="filters-inner">
+                                <button id="sort-date-i" type="submit" class="btn btn-link" name="order_date">Впорядкувати за датою</button>
+                            </div>
+                            <div class="filters-inner"><b>Дата</b></div>
+                            <div class="filters-inner">
+                                <form onsubmit="return false;">
+                                    <label for="date_from">Від</label>
+                                    <input id="di-from" class="filter-btn-inp" type="date" name="date_from">
+                                    <label for="date_to">До</label>
+                                    <input id="di-to" class="filter-btn-inp" type="date" name="date_to">
+                                    <button id="btn-date-i" class="filter-btn">Пошук</button>
+                                </form>
+                            </div>
+                            <div class="filters-inner">
+                                <form onsubmit="return false;">
+                                    <label for="resppersonsInp">Відповідальні особи</label>
+                                    <input id="resp-s" placeholder="Відповідальні особи" list="resppersons" class="filter-btn-inp" name="resppersonsInp">
+                                    <datalist id="resppersons"></datalist>
+                                    <button id="get-resp-s" class="filter-btn" type="submit" name="search_resp_p">Пошук</button>
+                                </form>
+                            </div>
+                            <div class="filters-inner">
+                                <form onsubmit="return false;">
+                                    <label for="managerInp">Відділення</label>
+                                    <input id="deps-s" placeholder="Відділення" list="departs" class="filter-btn-inp" name="departInp">
+                                    <datalist id="departs"></datalist>
+                                    <button id="get-dep-s" class="filter-btn" type="submit" name="search_depart">Пошук</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                    {if $table_content == []}
-                        <div class="empty-giving-info">Видач немає</div>
-                    {else}
-                        {foreach from=$table_content item=m}
-                            <div class="med-holder">
-                                <div class="med-name">
-                                    <div class="med-name-n">Видача №{$m->getId()} від {$m->getDate()}</div>
-                                    <div class="med-m-aval">Статус: {$m->getStatus()}</div>
-                                    {if {$m->getStatus()} == 'нове'}
-                                        <form action="issuanceManagerPage.php" method="post">
-                                            <input name="iss_id" value="{$m->getId()}" hidden>
-                                            <button type="submit" name="change_status" class="med-st-change edit-btn">Опрацювати</button>
-                                        </form>
-                                    {/if}
-                                </div>
-                                <div class="med-info">
-                                    <div class="">Для: {$m->getRespPerson()}</div>
-                                    <div class="">На відділення: {$m->getDepart()}</div>
-                                    {foreach from=$m->getGivenMed() item=g}
-                                        <div class="med-info-row">
-                                            <div>Найменування: {$g->getName()}</div>
-                                            <div>Кількість: {$g->getAmount()}</div>
-                                        </div>
-                                    {/foreach}
-                                </div>
-                            </div>
-                        {/foreach}
-                    {/if}
                 </div>
-            </div>
-            <div class="content-inner  col-md-2">
-                <div class="actions-holder">
-                    <form method="post" action="issuanceManagerPage.php">
-                        <button class="giving-action-btn" name="showAllG" type="submit">Усі</button>
-                    </form>
-                    <form method="post" action="issuanceManagerPage.php">
-                        <button class="giving-action-btn" name="showOtrG" type="submit">Отримано</button>
-                    </form>
-                    <form method="post" action="issuanceManagerPage.php">
-                        <button class="giving-action-btn" name="showOprG" type="submit">Опрацьовано</button>
-                    </form>
-                    <form method="post" action="issuanceManagerPage.php">
-                        <button class="giving-action-btn" name="showNewG" type="submit">Нове</button>
-                    </form>
+                <div class="search-content">
+                    <div class="empty-giving-info"></div>
+                    <div id="container-box" class="search-content">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-{include "../../frontend/html/footer.tpl"}
+<script type="text/javascript" src="../../frontend/js/pages.js"></script>
+<script type="text/javascript" src="../../frontend/js/getIssuanceManager.js"></script>
+<script type="text/javascript" src="../../frontend/js/managerPage.js"></script>
+<script type="text/javascript" src="../../frontend/js/managerHome.js"></script>
+</body>
+</html>

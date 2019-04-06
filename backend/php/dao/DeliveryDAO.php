@@ -22,18 +22,18 @@ class DeliveryDAO
             foreach ($pdo->query($sqlp) as $m){
                 $provider = $m["companyName"];
             }
+//
+//            $groups = "";
+//            $sqli = "SELECT * FROM medicinegroups WHERE idDelivery='".$id."';";
+//            foreach ($pdo->query($sqli) as $group){
+//                $groups .= "<br>".
+//                    "Номер групи: ".$group["idGroup"]."<br>".
+//                    "Кількість при поставці: ".$group["delPackAmount"]."<br>".
+//                    "Ціна за одиницю: ".$group["pricePerPack"]."<br>".
+//                    "Вартість: ".$group["totalPrice"]."<br><br>";
+//            }
 
-            $groups = "";
-            $sqli = "SELECT * FROM medicinegroups WHERE idDelivery='".$id."';";
-            foreach ($pdo->query($sqli) as $group){
-                $groups .= "<br>".
-                    "Номер групи: ".$group["idGroup"]."<br>".
-                    "Кількість при поставці: ".$group["delPackAmount"]."<br>".
-                    "Ціна за одиницю: ".$group["pricePerPack"]."<br>".
-                    "Вартість: ".$group["totalPrice"]."<br><br>";
-            }
-
-            self::$deliveries[] = new Delivery($id,$date,$price,$provider,$manager,$groups);
+            self::$deliveries[] = new Delivery($id,$date,$price,$row["idProvider"],$provider,$manager,[]);
         }
 
         Database::disconnect();

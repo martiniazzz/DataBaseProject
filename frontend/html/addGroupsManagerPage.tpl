@@ -1,18 +1,25 @@
-{include "../../frontend/html/header.tpl"}
+<html>
+<head>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+    <title>Поставка №{$id}</title>
+    <link href="../../frontend/css/pages.css" rel="stylesheet" type="text/css"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
 <div class="page-holder">
     <div class="header">
-        <div class="account">
+        <div class="header">
+            <img id="logout-img" class="img-header" src="../../frontend/assets/images/exit.png">
+            <div class="ver-separator"></div>
+            <img id="to-main-img" class="img-header img-header-m" src="../../frontend/assets/images/back.png">
+            <div class="ver-separator"></div>
+            <img id="to-dels-img" class="img-header img-header-m" src="../../frontend/assets/images/box.png">
+            <div class="ver-separator"></div>
             <div class="account-name">
                 {$managerName}
-            </div>
-            <div class="account-exit">
-                <a href="logout.php">Вийти</a>
-            </div>
-            <div class="account-giving">
-                <a href="mainManagerPage.php">На головну</a>
-            </div>
-            <div class="account-giving">
-                <a href="deliveriesManagerPage.php">До поставок</a>
             </div>
         </div>
     </div>
@@ -20,45 +27,53 @@
         <div class="row">
             <div class="content-inner content-holder col-md-8">
                 <div class="deliv_head">Поставка №{$id}</div>
-                <div class="deliv_holder">
-                    {foreach from=$groups_list item=g}
-                        <div class="deliv_inner">
-                            <div class="deliv_inner-inner">Номер групи: {$g->getId()} ({$g->getIdMedicine()})</div>
-                            <div class="deliv_inner-inner">Полиця: {$g->getShelf()}</div>
-                            <div class="deliv_inner-inner">Стелаж: {$g->getRack()}</div>
-                            <div class="deliv_inner-inner">Дата виготовлення: {$g->getProductDate()}</div>
-                            <div class="deliv_inner-inner">Термін придатності: {$g->getDueTo()}</div>
-                            <div class="deliv_inner-inner">Кількість упаковок в поставці:{$g->getDelPackAmount()}</div>
-                            <div class="deliv_inner-inner">Кількість одиниць на складі: {$g->getStorageUnitAmount()}</div>
-                            <div class="deliv_inner-inner">Ціна за упаковку: {$g->getPricePerPack()}</div>
-                            <div class="deliv_inner-inner">Загальна вартість: {$g->getTotalPrice()}</div>
-                            <button class="edit-btn edit-group" onclick="passGroupVals({$g->getId()},{$g->getShelf()},{$g->getRack()},'{$g->getProductDate()}',{$g->getDelPackAmount()},{$g->getPricePerPack()},'{$g->getIdMedicine()}')">Редагувати</button>
-                        </div>
-                    {/foreach}
+                <div id="container-box" class="search-content">
                 </div>
+
             </div>
             <div class="content-inner giving-holder col-md-4">
                 <div id="update_prov_div" class="">
-                    <form method="post" action="addGroupsManagerPage.php" id="form">
-                        <input id="up_sh" class="input-holder" type="text" name="shelf" placeholder="Полиця">
-                        <input id="up_ra" class="input-holder" type="text" name="rack" placeholder="Стелаж">
-                        <input id="up_date" class="input-holder" type="date" name="pdate" placeholder="Дата виготовлення">
-                        <input id="up_am" class="input-holder" type="text" name="amount" placeholder="Кількість в поставці">
-                        <input id="up_pr" class="input-holder" type="text" name="price" placeholder="Ціна за одиницю">
-                        <input id="up_med" class="input-holder" list="meds" name="med" type="text" placeholder="Медикамент">
-                        <datalist id="meds">
-                            {foreach from=$meds_list item=m}
-                                <option name="{$m->getId()}" value="{$m->getId()}">{$m->getName()}</option>
-                            {/foreach}
-                        </datalist>
+                    <form id="g-form" onsubmit="return false;">
+                        <div class="m-input-holder">
+                            <div class="m-input-label">Полиця</div>
+                            <input id="up_sh" class="input-holder" type="text" name="shelf" placeholder="">
+                        </div>
+                        <div class="m-input-holder">
+                            <div class="m-input-label">Стелаж</div>
+                            <input id="up_ra" class="input-holder" type="text" name="rack" placeholder="">
+                        </div>
+                        <div class="m-input-holder">
+                            <div class="m-input-label">Дата виготовлення</div>
+                            <input id="up_date" class="input-holder" type="date" name="pdate" placeholder="">
+                        </div>
+                        <div class="m-input-holder">
+                            <div class="m-input-label">Кількість в поставці</div>
+                            <input id="up_am" class="input-holder" type="text" name="amount" placeholder="Кількість в поставці">
+                        </div>
+                        <div class="m-input-holder">
+                            <div class="m-input-label">Ціна за одиницю</div>
+                            <input id="up_pr" class="input-holder" type="text" name="price" placeholder="Ціна за одиницю">
+                        </div>
+                        <div class="m-input-holder">
+                            <div class="m-input-label">Медикамент</div>
+                            <input id="up_med" class="input-holder" list="meds" name="med" type="text" placeholder="Медикамент">
+                            <datalist id="meds"></datalist>
+                        </div>
                         <input id="up_id" class="input-holder" type="number" name="id" placeholder="id">
                         <input name="delid" value="{$id}" hidden>
-                        <input id="close" onclick="clear_btn()" type="reset" class="delete-btn clear-btn to-right" value="&times;">
-                        <input id="up_sub" class="add-btn to-right" type="submit" name="submit_add" value="Додати">
+                        <input id="close" onclick="clear_btn()" type="reset" class="btn btn-danger clear-btn to-right" value="&times;">
+                        <input id="up_sub" class="btn btn-success to-right" type="submit" name="submit_add" value="Додати">
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-{include "../../frontend/html/footer.tpl"}
+<script type="text/javascript" src="../../frontend/js/pages.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="../../frontend/assets/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../frontend/js/managerPage.js"></script>
+<script type="text/javascript" src="../../frontend/js/getGroups.js"></script>
+<script type="text/javascript" src="../../frontend/js/managerHome.js"></script>
+</body>
+</html>

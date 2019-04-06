@@ -1,12 +1,11 @@
 {include "../../frontend/html/header.tpl"}
 <div class="page-holder">
     <div class="header">
-        <div class="account">
+        <div class="header">
+            <img id="logout-img" class="img-header" src="../../frontend/assets/images/exit.png">
+            <div class="ver-separator"></div>
             <div class="account-name">
                 Адміністратор
-            </div>
-            <div class="account-exit">
-                <a href="logout.php">Вийти</a>
             </div>
         </div>
     </div>
@@ -17,10 +16,10 @@
                     <div class="med-holder">
                         <div class="med-name">
                             <div class="med-name-n">{$m->getId()} : {$m->toString()} : {$m->getDep()}</div>
-                            <form action="adminPage.php" method="post" onsubmit="return confirmDelete()">
-                                <input name="id" value="{$m->getId()}" hidden>
-                                <button type="submit" name="delete" class="med-st-change delete-btn">Видалити</button>
-                            </form>
+                            {*<form action="adminPage.php" method="post" onsubmit="return confirmDelete()">*}
+                                {*<input name="id" value="{$m->getId()}" hidden>*}
+                                {*<button type="submit" name="delete" class="med-st-change delete-btn">Видалити</button>*}
+                            {*</form>*}
                         </div>
                     </div>
                 {/foreach}
@@ -35,10 +34,16 @@
                     <input class="input-holder" type="text" name="mname" placeholder="По-батькові">
                     <input id="depart" class="input-holder" type="text" name="dep" placeholder="Відділ">
                     <input class="input-holder" type="text" name="password" placeholder="Пароль">
-                    <button class="add-btn to-right" name="submit_add">Додати</button>
+                    <button class="btn btn-success to-right" name="submit_add">Додати</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-{include "../../frontend/html/footer.tpl"}
+<script type="text/javascript" src="../../frontend/assets/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../frontend/js/managerPage.js"></script>
+<script type="text/javascript" src="../../frontend/js/respPersonPage.js"></script>
+<script type="text/javascript" src="../../frontend/js/pages.js"></script>
+<script type="text/javascript" src="../../frontend/js/managerHome.js"></script>
+</body>
+</html>

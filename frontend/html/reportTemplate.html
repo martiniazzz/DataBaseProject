@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Карточка складського обліку матеріалів</title>
+    <link href='../../frontend/css/report.css' rel='stylesheet' type='text/css'/>
+</head>
+<body>
+<div>
+    <div class='report-header'>
+        <div class='report-name'>
+            <div class='report-name-top'>
+                КП Трускавецька міська лікарня
+            </div>
+            <div class='report-name-sep'></div>
+        </div>
+        <div class='report-code'>
+            Код по ОКУД 0303010
+        </div>
+    </div>
+    <div class='report-title'>Карточка складського обліку матеріалів</div>
+    <div class='report-content-top'>
+        <table border='1'>
+            <tr>
+                <th>№ групи</th>
+                <th>Стелаж</th>
+                <th>Полиця</th>
+                <th>Тип одиниці</th>
+                <th>Кількість при поставці</th>
+                <th>Кількість одиниць</th>
+                <th>Ціна за одиницю</th>
+                <th>Загальна вартість</th>
+            </tr>
+            <tr>
+                <td id='groupNO'></td>
+                <td id='rack'></td>
+                <td id='shelf'></td>
+                <td id='type'></td>
+                <td id='delAmount'></td>
+                <td id='amount'></td>
+                <td id='price'></td>
+                <td id='total'></td>
+            </tr>
+        </table>
+    </div>
+    <div class='report-content-mid'>
+        Найменування матеріалу <span id='underline-t'></span>
+    </div>
+    <div class='report-content-bottom'>
+        <table border='1'>
+            <tr>
+                <th>Дата запису</th>
+                <th>№ документа</th>
+                <th>Від кого отримано/кому видано/причина</th>
+                <th>Кількість</th>
+                <th>Підпис</th>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

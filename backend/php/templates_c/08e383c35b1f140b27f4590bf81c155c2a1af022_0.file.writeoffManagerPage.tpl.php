@@ -5,127 +5,109 @@
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5c9f82247cb0f0_77965793',
+  'unifunc' => 'content_5ca89aa8da5f77_72348730',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '08e383c35b1f140b27f4590bf81c155c2a1af022' => 
     array (
       0 => 'D:\\university\\database\\databaseproject\\frontend\\html\\writeoffManagerPage.tpl',
-      1 => 1553957410,
+      1 => 1554553511,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
     'file:../../frontend/html/header.tpl' => 1,
-    'file:../../frontend/html/footer.tpl' => 1,
+    'file:../../frontend/html/managerHeader.tpl' => 1,
   ),
 ),false)) {
-function content_5c9f82247cb0f0_77965793 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ca89aa8da5f77_72348730 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:../../frontend/html/header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 <div class="page-holder">
-    <div class="header">
-        <div class="account">
-            <div class="account-name">
-                <?php echo $_smarty_tpl->tpl_vars['managerName']->value;?>
-
-            </div>
-            <div class="account-exit">
-                <a href="logout.php">Вийти</a>
-            </div>
-            <div class="account-giving">
-                <a href="mainManagerPage.php">На головну</a>
-            </div>
-        </div>
-    </div>
+    <?php $_smarty_tpl->_subTemplateRender("file:../../frontend/html/managerHeader.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
     <div class="content">
         <div class="row">
             <div class="content-inner content-holder col-md-8">
-                <div class="search-content">
-                    <?php if ($_smarty_tpl->tpl_vars['table_content']->value == array()) {?>
-                        <div class="empty-giving-info">Списань немає</div>
-                    <?php } else { ?>
+                <div class="search-box">
+                    <div>
+                        <div class="filter-toggle"><button id="toggle-filters-btn" class="btn-expand">Фільтри</button></div>
                         <div class="filters">
                             <div class="filters-inner">
-                                <form method="post" action="writeoffManagerPage.php">
-                                    <button type="submit" class="filter-btn" name="date_order">Упорядкувати за датою</button>
-                                </form>
+                                <button id="sortDate" type="submit" class="btn btn-link" name="date_order">Упорядкувати за датою</button>
                             </div>
                             <div class="filters-inner">
-                                <form method="post" action="writeoffManagerPage.php">
+                                <form onsubmit="return false">
                                     <label for="date_from">Від</label>
-                                    <input class="filter-btn" type="date" name="date_from">
+                                    <input id="d-from" class="filter-btn-inp" type="date">
                                     <label for="date_to">До</label>
-                                    <input class="filter-btn" type="date" name="date_to">
-                                    <button type="submit" class="filter-btn" type="submit" name="date_search">Пошук</button>
+                                    <input id="d-to" class="filter-btn-inp" type="date">
+                                    <button id="b-s-date" class="filter-btn" >Пошук</button>
                                 </form>
                             </div>
                         </div>
-                        <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['table_content']->value, 'm');
-if ($_from !== null) {
-foreach ($_from as $_smarty_tpl->tpl_vars['m']->value) {
-?>
-                            <div class="med-holder">
-                                <div class="med-name">
-                                    <div class="med-name-n">Списання №<?php echo $_smarty_tpl->tpl_vars['m']->value->getId();?>
- від <?php echo $_smarty_tpl->tpl_vars['m']->value->getDate();?>
-</div>
-                                </div>
-                                <div class="med-info">
-                                    <div>Номер групи: <?php echo $_smarty_tpl->tpl_vars['m']->value->getIdGroup();?>
-</div>
-                                    <div>Кількість: <?php echo $_smarty_tpl->tpl_vars['m']->value->getAmount();?>
-</div>
-                                    <div>Причина: <?php echo $_smarty_tpl->tpl_vars['m']->value->getReason();?>
-</div>
-                                </div>
-                            </div>
-                        <?php
-}
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
-                    <?php }?>
+                    </div>
+                </div>
+                <div class="search-content">
+                    <div id="container-box" class="search-content">
+                    </div>
                 </div>
             </div>
             <div class="content-inner giving-holder col-md-4">
-                <form method="post" action="writeoffManagerPage.php" id="form" onsubmit="return addWriteOff()">
-                    <input id="up_prov" class="input-holder" list="groups" name="name" type="text" placeholder="Група">
-                    <datalist id="groups">
-                        <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['groups_list']->value, 'm');
-if ($_from !== null) {
-foreach ($_from as $_smarty_tpl->tpl_vars['m']->value) {
-?>
-                            <option name="<?php echo $_smarty_tpl->tpl_vars['m']->value->getId();?>
-" value="<?php echo $_smarty_tpl->tpl_vars['m']->value->getId();?>
- <?php echo $_smarty_tpl->tpl_vars['m']->value->getName();?>
- (Макс.:<?php echo $_smarty_tpl->tpl_vars['m']->value->getMax();?>
-)"></option>
-                        <?php
-}
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
-                    </datalist>
-                    <input id="up_date" class="input-holder" type="date" name="date" placeholder="Дата">
-                    <input id="up_am" class="input-holder" type="number" min="1" name="amount" placeholder="Кількість">
-                    <input id="up_re" onkeydown="return false" class="input-holder" list="reasons" type="text"  name="reason" placeholder="Причина">
-                    <datalist id="reasons">
-                        <option name="bad_deliv" value="Зіпсовано при поставці"></option>
-                        <option name="out_of_date" value="Прострочено"></option>
-                    </datalist>
-                    <input id="up_sh" class="input-holder" type="number" min="1" name="shelf" placeholder="Полиця">
-                    <input id="up_ra" class="input-holder" type="number" min="1" name="rack" placeholder="Стелаж">
+                <form id="w-form" onsubmit="return false">
+                    <div class="m-input-holder">
+                        <div class="m-input-label">Група</div>
+                        <input id="up_prov" class="input-holder" list="groups" name="name" type="text" placeholder="">
+                        <datalist id="groups">
+                        </datalist>
+                    </div>
+                    <div class="m-input-holder">
+                        <div class="m-input-label">Дата</div>
+                        <input id="up_date" class="input-holder" type="date" name="date" placeholder="">
+                    </div>
+                    <div class="m-input-holder">
+                        <div class="m-input-label">Кількість</div>
+                        <input id="up_am" class="input-holder" type="number" min="1" name="amount" placeholder="">
+                    </div>
+                    <div class="m-input-holder">
+                        <div class="m-input-label">Причина</div>
+                        <input id="up_re"class="input-holder" list="reasons" type="text"  name="reason" placeholder="">
+                        <datalist id="reasons">
+                            <option name="bad_deliv" value="Зіпсовано при поставці"></option>
+                            <option name="out_of_date" value="Прострочено"></option>
+                        </datalist>
+                    </div>
+                    <div class="m-input-holder">
+                        <div class="m-input-label">Полиця</div>
+                        <input id="up_sh" class="input-holder" type="number" min="1" name="shelf" placeholder="">
+                    </div>
+                    <div class="m-input-holder">
+                        <div class="m-input-label">Стелаж</div>
+
+                        <input id="up_ra" class="input-holder" type="number" min="1" name="rack" placeholder="">
+                    </div>
                     <input id="up_id" class="input-holder" type="number" name="id" placeholder="id">
-                    <input id="close" onclick="clear_btn()" type="reset" class="delete-btn clear-btn to-right" value="&times;">
-                    <input id="up_sub" class="add-btn to-right" type="submit" name="submit_add" value="Додати">
+                    <input id="close" onclick="clear_btn()" type="reset" class="btn btn-danger clear-btn to-right" value="&times;">
+                    <input id="up_sub" class="btn btn-success to-right" type="submit" name="submit_add" value="Додати">
                 </form>
             </div>
         </div>
     </div>
 </div>
-<?php $_smarty_tpl->_subTemplateRender("file:../../frontend/html/footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
-}
+<?php echo '<script'; ?>
+ type="text/javascript" src="../../frontend/js/pages.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ type="text/javascript" src="../../frontend/js/getWriteOff.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ type="text/javascript" src="../../frontend/js/managerPage.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ type="text/javascript" src="../../frontend/js/managerHome.js"><?php echo '</script'; ?>
+>
+</body>
+</html><?php }
 }
