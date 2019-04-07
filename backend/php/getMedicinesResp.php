@@ -1,9 +1,13 @@
 <?php
 
 require "database/Database.php";
+require "database/TablesUpdate.php";
 require "dao/MedicineManagerDAO.php";
+require "dao/IssuanceDAO.php";
 require "classes/MedicineManager.php";
 require "classes/MedicineGroup.php";
+require "classes/Issuance.php";
+require "classes/GivenMed.php";
 
 if(isset($_POST["action"]) && $_POST["action"]=="sorted_name"){
     $sql = "SELECT * FROM medicines ORDER BY medName;";
@@ -22,7 +26,7 @@ else if(isset($_POST["action"]) && $_POST["action"]=="createIssue"){
     $pdo = Database::connect();
     $sql = "INSERT INTO issuance (iDate, status, idManager, idRespPerson) VALUES (?,?,?,?)";
     $stmt= $pdo->prepare($sql);
-    $stmt->execute([date('Y-m-d'), "нове","",$_SESSION["usernameId"]]);
+    $stmt->execute([date('Y-m-d'), "нове","sm1001",$_SESSION["usernameId"]]);
 
     $lastId = $pdo->lastInsertId();
 
@@ -70,21 +74,36 @@ else if(isset($_POST["action"]) && $_POST["action"]=="createIssue"){
             $stmt= $pdo->prepare($sql);
             $stmt->execute([$givam[$i],$grid[$i],$lastId]);
         }
-        for ($i=0;$i<(count($newam));$i++){
-            $sql = "UPDATE medicinegroups SET storageUnitAmount=? WHERE idGroup=?";
-            $stmt= $pdo->prepare($sql);
-            $stmt->execute([$newam[$i], $grid[$i]]);
-        }
+//        for ($i=0;$i<(count($newam));$i++){
+//            $sql = "UPDATE medicinegroups SET storageUnitAmount=? WHERE idGroup=?";
+//            $stmt= $pdo->prepare($sql);
+//            $stmt->execute([$newam[$i], $grid[$i]]);
+//        }
     }
 
-    $sql = "SELECT issuance.idIssuance, iDate, status, idManager, idRespPerson
-            FROM issuance
-            WHERE idRespPerson='".$_SESSION["usernameId"]."';";
-    IssuanceDAO::eagerInit($sql);
-    $issue = IssuanceDAO::getIssuance();
-
-    $smarty->assign($table_cont,$issue);
     Database::disconnect();
+
+    TablesUpdate::updateMedicines();
+
+    $sql = "SELECT * FROM medicines";
+    MedicineManagerDAO::eagerInit($sql);
+    $medicine = MedicineManagerDAO::getMedicines();
+    sendData($medicine);
+}
+else if(isset($_POST["action"]) && $_POST["action"]=="getMedsIssue"){
+    $pdo = Database::connect();
+    $sql = "SELECT medicines.idMedicine, medName, COALESCE(SUM(storageUnitAmount),0) AS max 
+            FROM medicines INNER JOIN medicinegroups ON medicines.idMedicine = medicinegroups.idMedicine
+            GROUP BY medicines.idMedicine
+            HAVING COALESCE(SUM(storageUnitAmount),0) > 0";
+    $result = [];
+    foreach ($pdo->query($sql) as $row){
+        $result[] = ["id"=>$row["idMedicine"],
+            "name"=>$row["medName"],
+            "max"=>$row["max"]];
+    }
+    Database::disconnect();
+    echo json_encode($result);
 }
 else{
     $sql = "SELECT * FROM medicines";

@@ -75,4 +75,5 @@ if(isset($_POST['newIssuance'])) {
     header('location:respPersonPage.php');
 }
 
+
 $smarty->display("../../frontend/html/respPersonPage.tpl");

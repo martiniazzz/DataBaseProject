@@ -31,9 +31,11 @@ WHERE storageUnitAmount=0 OR storageUnitAmount IS NULL );";
 else if(isset($_GET["finished"])){
     $sql = "SELECT *
 FROM medicines
-WHERE idMedicine NOT IN (SELECT medicines.idMedicine
-FROM medicines LEFT JOIN medicinegroups ON (medicines.idMedicine = medicinegroups.idMedicine)
-WHERE storageUnitAmount<>0 OR storageUnitAmount IS NOT NULL );";
+WHERE idMedicine NOT IN (SELECT idMedicine
+                        FROM medicines M
+	WHERE NOT EXISTS (SELECT *
+FROM medicines LEFT JOIN medicinegroups ON medicines.idMedicine = medicinegroups.idMedicine
+WHERE (storageUnitAmount=0 OR storageUnitAmount IS NULL) AND M.idMedicine =medicines.idMedicine  ));";
     MedicineManagerDAO::eagerInit($sql);
     $medicine = MedicineManagerDAO::getMedicines();
     sendData($medicine);
@@ -119,7 +121,7 @@ WHERE dueTo <= '".$newdate."');";
     $medicine = MedicineManagerDAO::getMedicines();
     sendData($medicine);
 }
-else{
+else if(isset($_POST["action"]) && $_POST["action"]=="getAllMeds"){
     $sql = "SELECT * FROM medicines";
     MedicineManagerDAO::eagerInit($sql);
     $medicine = MedicineManagerDAO::getMedicines();

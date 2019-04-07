@@ -31,7 +31,7 @@ $sql_providers ="CREATE TABLE IF NOT EXISTS Providers(idProvider INT(11) AUTO_IN
 $pdo->exec($sql_providers);
 
 //PROVIDERS PHONES
-$sql_phones = "CREATE TABLE IF NOT EXISTS  Phones(phone INT(20) PRIMARY KEY,
+$sql_phones = "CREATE TABLE IF NOT EXISTS  Phones(phone NVARCHAR(20) PRIMARY KEY,
                                                   idProvider INT(11),
                                                   FOREIGN KEY (idProvider) REFERENCES Providers(idProvider));";
 $pdo->exec($sql_phones);
@@ -90,7 +90,6 @@ $pdo->exec($sql_writeoff);
 //ISSUANCE
 $sql_issuance = "CREATE TABLE IF NOT EXISTS  Issuance(idIssuance INT(11) AUTO_INCREMENT PRIMARY KEY,
                                                   iDate DATE NOT NULL,
-                                                  totalPrice DECIMAL(19,4) NOT NULL,
                                                   status NVARCHAR(30) NOT NULL,
                                                   idManager NVARCHAR(50),
                                                   idRespPerson NVARCHAR(50),

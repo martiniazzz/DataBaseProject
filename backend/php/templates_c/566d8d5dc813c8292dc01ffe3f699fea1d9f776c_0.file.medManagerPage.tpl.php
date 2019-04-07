@@ -5,26 +5,38 @@
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5ca899de1ce904_76267728',
+  'unifunc' => 'content_5ca9f35d45bf57_44684368',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '566d8d5dc813c8292dc01ffe3f699fea1d9f776c' => 
     array (
       0 => 'D:\\university\\database\\databaseproject\\frontend\\html\\medManagerPage.tpl',
-      1 => 1554553278,
+      1 => 1554641754,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
-    'file:../../frontend/html/header.tpl' => 1,
     'file:../../frontend/html/managerHeader.tpl' => 1,
   ),
 ),false)) {
-function content_5ca899de1ce904_76267728 (Smarty_Internal_Template $_smarty_tpl) {
-$_smarty_tpl->_subTemplateRender("file:../../frontend/html/header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
-?>
+function content_5ca9f35d45bf57_44684368 (Smarty_Internal_Template $_smarty_tpl) {
+?><html>
+<head>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+    <title>Медикаменти</title>
+    <link href="../../frontend/css/pages.css" rel="stylesheet" type="text/css"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <?php echo '<script'; ?>
+ src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"><?php echo '</script'; ?>
+>
+</head>
+<body>
 <div class="page-holder">
     <?php $_smarty_tpl->_subTemplateRender("file:../../frontend/html/managerHeader.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
@@ -108,13 +120,7 @@ $_smarty_tpl->_subTemplateRender("file:../../frontend/html/header.tpl", $_smarty
  type="text/javascript" src="../../frontend/js/pages.js"><?php echo '</script'; ?>
 >
 <?php echo '<script'; ?>
- src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"><?php echo '</script'; ?>
->
-<?php echo '<script'; ?>
  type="text/javascript" src="../../frontend/js/getMedicines.js"><?php echo '</script'; ?>
->
-<?php echo '<script'; ?>
- type="text/javascript" src="../../frontend/assets/libs/jquery-3.3.1.min.js"><?php echo '</script'; ?>
 >
 <?php echo '<script'; ?>
  type="text/javascript" src="../../frontend/js/managerPage.js"><?php echo '</script'; ?>

@@ -1,4 +1,14 @@
-{include "../../frontend/html/header.tpl"}
+<html>
+<head>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+    <title>Медикаменти</title>
+    <link href="../../frontend/css/pages.css" rel="stylesheet" type="text/css"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
 <div class="page-holder">
     {include "../../frontend/html/managerHeader.tpl"}
     <div class="content">
@@ -78,9 +88,7 @@
     </div>
 </div>
 <script type="text/javascript" src="../../frontend/js/pages.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="../../frontend/js/getMedicines.js"></script>
-<script type="text/javascript" src="../../frontend/assets/libs/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="../../frontend/js/managerPage.js"></script>
 <script type="text/javascript" src="../../frontend/js/managerHome.js"></script>
 </body>

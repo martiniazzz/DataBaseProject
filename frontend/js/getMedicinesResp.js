@@ -1,6 +1,34 @@
 $(document).ready(function() {
     update_content();
+    showSearches();
 });
+
+function showSearches(){
+    $.ajax({
+        url: "../../backend/php/getMedicinesResp.php",
+        type: 'POST',
+        data:{action:"getMedsIssue"},
+        dataType: 'JSON',
+        success: function(response){
+            addSearches(response);
+        },
+        error:function(xhr, status, error) {
+            alert(xhr.responseText);
+        }
+    });
+}
+
+function addSearches(data){
+    let box = document.getElementById("medicines");
+    box.innerHTML = "";
+    data.forEach(function (e) {
+        let opt = document.createElement("option");
+        opt.value=e["name"];
+        opt.setAttribute("data-max",e["max"]);
+        opt.setAttribute("name",e["id"]);
+        box.appendChild(opt);
+    });
+}
 
 $('#input-btn').click(function () {
     let prefix = $('#search-input').val();
@@ -127,9 +155,13 @@ $('#giving-create').click(function () {
             success: function(response){
                 addAlert("Видачу успішно створено!");
                 showContent(response);
+            },
+            error:function(xhr, status, error) {
+                alert(xhr.responseText);
             }
         });
         sessionStorage.clear();
+        showGivings(JSON.parse(sessionStorage.getItem("givingList") || "[]"));
         return true;
     });
     $("#modal-btn-no").click(function () {

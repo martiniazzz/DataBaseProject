@@ -48,13 +48,7 @@
                 <div class="separator"></div>
                 <div class="giving-content">
                     <input id="giving-search" list="medicines" name="default" placeholder="Виберіть медикамент" />
-                    <datalist id="medicines">
-                        {foreach from=$table_content item=m}
-                            {if {$m->getStorageAmount()} != 0}
-                                <option name="{$m->getId()}" data-max="{$m->getStorageAmount()}" value="{$m->getName()}"></option>
-                            {/if}
-                        {/foreach}
-                    </datalist>
+                    <datalist id="medicines"></datalist>
                     <button id="giving-add">Додати</button>
                 </div>
                 <div id="giving-inner"></div>

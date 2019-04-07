@@ -133,10 +133,14 @@ $('#show-with-soon-out').click(function () {
 function update_content(){
     $.ajax({
         url: "../../backend/php/getMedicines.php",
-        type: 'get',
+        type: 'post',
+        data:{action:"getAllMeds"},
         dataType: 'JSON',
         success: function(response){
             showContent(response);
+        },
+        error:function(xhr, status, error) {
+            alert(xhr.responseText);
         }
     });
 }
@@ -267,7 +271,7 @@ $('#up_sub').click(function () {
                 showContent(response);
             },
             error:function () {
-                alert('f')
+
             }
         });
     }

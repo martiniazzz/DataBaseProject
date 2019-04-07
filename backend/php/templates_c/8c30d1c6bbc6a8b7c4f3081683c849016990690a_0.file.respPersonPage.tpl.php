@@ -5,14 +5,14 @@
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5ca893810c9e27_61938504',
+  'unifunc' => 'content_5ca9ed8cd8cd56_39208794',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '8c30d1c6bbc6a8b7c4f3081683c849016990690a' => 
     array (
       0 => 'D:\\university\\database\\databaseproject\\frontend\\html\\respPersonPage.tpl',
-      1 => 1554551678,
+      1 => 1554640009,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ca893810c9e27_61938504 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ca9ed8cd8cd56_39208794 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html>
 <head>
     <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
@@ -76,26 +76,7 @@ function content_5ca893810c9e27_61938504 (Smarty_Internal_Template $_smarty_tpl)
                 <div class="separator"></div>
                 <div class="giving-content">
                     <input id="giving-search" list="medicines" name="default" placeholder="Виберіть медикамент" />
-                    <datalist id="medicines">
-                        <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['table_content']->value, 'm');
-if ($_from !== null) {
-foreach ($_from as $_smarty_tpl->tpl_vars['m']->value) {
-?>
-                            <?php ob_start();
-echo $_smarty_tpl->tpl_vars['m']->value->getStorageAmount();
-$_prefixVariable1 = ob_get_clean();
-if ($_prefixVariable1 != 0) {?>
-                                <option name="<?php echo $_smarty_tpl->tpl_vars['m']->value->getId();?>
-" data-max="<?php echo $_smarty_tpl->tpl_vars['m']->value->getStorageAmount();?>
-" value="<?php echo $_smarty_tpl->tpl_vars['m']->value->getName();?>
-"></option>
-                            <?php }?>
-                        <?php
-}
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
-                    </datalist>
+                    <datalist id="medicines"></datalist>
                     <button id="giving-add">Додати</button>
                 </div>
                 <div id="giving-inner"></div>
