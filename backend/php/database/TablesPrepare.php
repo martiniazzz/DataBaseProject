@@ -53,7 +53,7 @@ $sql_medicines = "CREATE TABLE IF NOT EXISTS  Medicines(idMedicine INT(11) AUTO_
                                                   medDescript NVARCHAR(300) NOT NULL,
                                                   unitType NVARCHAR(50) NOT NULL,
                                                   unitAmount INT(5) NOT NULL,
-                                                  storageTemp DECIMAL (5,2) NOT NULL,
+                                                  storageTemp NVARCHAR(200) NOT NULL,
                                                   usabilityTerm INT(10) NOT NULL);";
 $pdo->exec($sql_medicines);
 
@@ -64,7 +64,6 @@ $sql_med_groups = "CREATE TABLE IF NOT EXISTS  MedicineGroups(idGroup INT(11) AU
                                                   productDate DATE NOT NULL,
                                                   dueTo DATE NOT NULL,
                                                   delPackAmount INT(10) NOT NULL,
-                                                  storagePackAmount INT(10) NOT NULL,
                                                   storageUnitAmount INT(10) NOT NULL,
                                                   pricePerPack DECIMAL(19,4) NOT NULL,
                                                   totalPrice DECIMAL(19,4) NULL,
