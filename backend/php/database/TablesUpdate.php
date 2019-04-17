@@ -22,13 +22,12 @@ class TablesUpdate
             }
             $tot = $deliv - $giv - $off;
             $totalPrice = $deliv *  $v["pricePerPack"];
-            $fin = $tot == 0 ? TRUE : FALSE;
 
             $prod = $v["productDate"];
             $toadd = $v["usabilityTerm"];
             $date = date('Y-m-d', strtotime("+".$toadd." months", strtotime($prod)));
 
-            $stmt= $pdo->prepare("UPDATE medicinegroups SET storageUnitAmount='".$tot."',totalPrice='".$totalPrice."',isFinished='".$fin."' ,dueTo='".$date."' WHERE idGroup='".$v["idGroup"]."';");
+            $stmt= $pdo->prepare("UPDATE medicinegroups SET storageUnitAmount='".$tot."',totalPrice='".$totalPrice."',dueTo='".$date."' WHERE idGroup='".$v["idGroup"]."';");
             $stmt->execute();
         }
 

@@ -12,7 +12,7 @@ function update_content(){
             showContent(response);
         },
         error:function () {
-            alert('f1')
+            //alert('f1')
         }
     });
 }
@@ -26,7 +26,7 @@ function add_searches() {
             showSearches(response);
         },
         error:function () {
-            alert('f')
+            //alert('f')
         }
     });
 }
@@ -151,6 +151,6 @@ $('#up_sub').click(function () {
         });
     }
 
-    document.getElementById("g-form").reset();
-    clear_btn();
+    //document.getElementById("g-form").reset();
+    //clear_btn();
 });

@@ -30,7 +30,7 @@ class MedicineGroupDAO
             foreach ($pdo->query($sqlm) as $m)
                 $medName = $m["medName"];
 
-            self::$groups[] = new MedicineGroup($id, $shelfNo, $rackNo, $prodDate, $dueTo, $delPackAmount, $storageUA, $pricePerPack, $total, 0, $row["idMedicine"], $deliv,$medName);
+            self::$groups[] = new MedicineGroup($id, $shelfNo, $rackNo, $prodDate, $dueTo, $delPackAmount, $storageUA, $pricePerPack, $total, $row["idMedicine"], $deliv,$medName);
 
         }
 

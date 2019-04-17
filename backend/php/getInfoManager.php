@@ -102,7 +102,7 @@ FROM (SELECT medicines.idMedicine,medicinegroups.idGroup, COUNT(idWriteOff) AS a
         $min = $row["min"];
     }
 
-    $sql = "SELECT medicines.idMedicine,medicinegroups.idGroup, medName
+    $sql = "SELECT  medicines.idMedicine,medicinegroups.idGroup, medName
     FROM (medicines INNER JOIN medicinegroups ON medicines.idMedicine=medicinegroups.idMedicine)
             LEFT JOIN writeoff ON medicinegroups.idGroup = writeoff.idGroup
             GROUP BY medicinegroups.idGroup,medicines.idMedicine
@@ -113,7 +113,7 @@ FROM (SELECT medicines.idMedicine,medicinegroups.idGroup, COUNT(idWriteOff) AS a
         $data6[] = [$row["medName"]];
     }
 
-    $sql = "SELECT medicines.idMedicine,medicinegroups.idGroup, medName
+    $sql = "SELECT DISTINCT medicines.idMedicine, medicinegroups.idGroup, medName
     FROM (medicines INNER JOIN medicinegroups ON medicines.idMedicine=medicinegroups.idMedicine)
             LEFT JOIN writeoff ON medicinegroups.idGroup = writeoff.idGroup
             GROUP BY medicinegroups.idGroup,medicines.idMedicine
@@ -123,13 +123,31 @@ FROM (SELECT medicines.idMedicine,medicinegroups.idGroup, COUNT(idWriteOff) AS a
     foreach ($pdo->query($sql) as $row){
         $data7[] = [$row["medName"]];
     }
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    $sql = "SELECT DISTINCT medName FROM medicines INNER JOIN medicinegroups X
+            ON medicines.idMedicine=X.idMedicine
+            WHERE NOT EXISTS 
+            (SELECT *
+            FROM responsiblepersons 
+            WHERE department NOT IN
+            (SELECT department
+            FROM (responsiblepersons INNER JOIN issuance 
+            ON responsiblepersons.idRespPerson = issuance.idRespPerson)
+            INNER JOIN givenmed ON givenmed.idIssuance = issuance.idIssuance
+            WHERE idGroup = X.idGroup))";
+
+    $data8 = [];
+    foreach ($pdo->query($sql) as $row){
+        $data8[] = ["name"=>$row["medName"]];
+    }
+
 
     Database::disconnect();
 
     $result = ["stat"=>$data1,
         "maxd"=>$data2,"mind"=>$data3,
         "maxg"=>$data4,"ming"=>$data5,
-        "maxw"=>$data6,"minw"=>$data7];
+        "maxw"=>$data6,"minw"=>$data7,"allDeps"=>$data8];
 
     echo json_encode($result);
 }
@@ -198,10 +216,24 @@ else if(isset($_POST["action"]) && $_POST["action"]=="provsStat"){
     foreach ($pdo->query($sql) as $row){
         $data3[] = ["name"=>$row["companyName"],"amount"=>$row["amount"],"total"=>$row["total"]];
     }
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    $sql = "SELECT companyName FROM providers X 
+            WHERE NOT EXISTS 
+            (SELECT *
+            FROM medicines
+            WHERE idMedicine NOT IN
+            (SELECT idMedicine
+            FROM medicinegroups INNER JOIN deliveries ON medicinegroups.idDelivery = deliveries.idDelivery
+            WHERE idProvider = X.idProvider))";
+
+    $data4 = [];
+    foreach ($pdo->query($sql) as $row){
+        $data4[] = ["name"=>$row["companyName"]];
+    }
 
     Database::disconnect();
 
-    $result = ["max"=>$data1,"min"=>$data2,"stat"=>$data3];
+    $result = ["max"=>$data1,"min"=>$data2,"stat"=>$data3,"provAllMeds"=>$data4];
 
     echo json_encode($result);
 }

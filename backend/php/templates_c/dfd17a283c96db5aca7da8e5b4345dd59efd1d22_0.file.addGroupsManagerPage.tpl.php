@@ -5,14 +5,14 @@
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5ca898d126efc3_86199909',
+  'unifunc' => 'content_5cab2556db6f78_42884307',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'dfd17a283c96db5aca7da8e5b4345dd59efd1d22' => 
     array (
       0 => 'D:\\university\\database\\databaseproject\\frontend\\html\\addGroupsManagerPage.tpl',
-      1 => 1554553040,
+      1 => 1554720085,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ca898d126efc3_86199909 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5cab2556db6f78_42884307 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html>
 <head>
     <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
@@ -102,12 +102,6 @@ function content_5ca898d126efc3_86199909 (Smarty_Internal_Template $_smarty_tpl)
 </div>
 <?php echo '<script'; ?>
  type="text/javascript" src="../../frontend/js/pages.js"><?php echo '</script'; ?>
->
-<?php echo '<script'; ?>
- src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"><?php echo '</script'; ?>
->
-<?php echo '<script'; ?>
- type="text/javascript" src="../../frontend/assets/libs/jquery-3.3.1.min.js"><?php echo '</script'; ?>
 >
 <?php echo '<script'; ?>
  type="text/javascript" src="../../frontend/js/managerPage.js"><?php echo '</script'; ?>

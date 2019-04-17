@@ -18,12 +18,11 @@ class MedicineGroup
     private $storageUnitAmount;
     private $pricePerPack;
     private $totalPrice;
-    private $isFinished;
     private $idMedicine;
     private $medName;
     private $idDelivery;
 
-    public function __construct($id, $shelf, $rack, $productDate, $dueTo, $delPackAmount, $storageUnitAmount, $pricePerPack, $totalPrice, $isFinished, $idMedicine, $idDelivery,$medName)
+    public function __construct($id, $shelf, $rack, $productDate, $dueTo, $delPackAmount, $storageUnitAmount, $pricePerPack, $totalPrice, $idMedicine, $idDelivery,$medName)
     {
         $this->id = $id;
         $this->shelf = $shelf;
@@ -34,7 +33,6 @@ class MedicineGroup
         $this->storageUnitAmount = $storageUnitAmount;
         $this->pricePerPack = $pricePerPack;
         $this->totalPrice = $totalPrice;
-        $this->isFinished = $isFinished;
         $this->idMedicine = $idMedicine;
         $this->idDelivery = $idDelivery;
         $this->medName = $medName;
@@ -110,14 +108,6 @@ class MedicineGroup
     public function getTotalPrice()
     {
         return $this->totalPrice;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getisFinished()
-    {
-        return $this->isFinished;
     }
 
     /**

@@ -228,6 +228,16 @@ $('#up_sub').click(function () {
     let v2 = document.getElementById("up_date").value;
     let v3 = document.getElementById("up_prov").value;
 
+    //let today = new Date().format('Y-m-d h:i:s');
+    //dateFormat(new Date(), 'm-d-Y h:i:s');
+    // alert(today+"   "+v2)
+    // if(v2 < today){
+    //     alert("bad date")
+    //     return;
+    // }
+    // else
+    //     return;
+
     if($(this).attr('name') === "submit_add"){
         $.ajax({
             url: "../../backend/php/getDeliveries.php",

@@ -5,14 +5,14 @@
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5ca90362234e14_46476638',
+  'unifunc' => 'content_5cab3e73766549_48377710',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c9c27448fd19135afb7a4f89c8311bf430ba4c71' => 
     array (
       0 => 'D:\\university\\database\\databaseproject\\frontend\\html\\infoManagerPage.tpl',
-      1 => 1554580320,
+      1 => 1554726512,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../../frontend/html/managerHeader.tpl' => 1,
   ),
 ),false)) {
-function content_5ca90362234e14_46476638 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5cab3e73766549_48377710 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html>
 <head>
     <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
@@ -36,6 +36,7 @@ function content_5ca90362234e14_46476638 (Smarty_Internal_Template $_smarty_tpl)
  src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"><?php echo '</script'; ?>
 >
 </head>
+<body>
 <body>
 <link href='../../frontend/css/report.css' rel='stylesheet' type='text/css'/>
 <div class="page-holder">

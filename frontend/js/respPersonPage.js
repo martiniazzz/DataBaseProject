@@ -90,7 +90,7 @@ function changeVal(med,max,name,v) {
     if(givings[name] !== null && typeof givings[name] !== 'undefined'){
         givings[name]["amount"]= parseInt(v);
         if(givings[name]["amount"] > parseInt(max))
-            givings[name]["amount"]-=1;
+            givings[name]["amount"]=max;
     }
     sessionStorage.setItem('givingList', JSON.stringify(givings));
 }

@@ -10,4 +10,7 @@ if(empty($_SESSION['username']))
 $smarty = new Smarty;
 $smarty->assign("managerName",$_SESSION["name"]);
 
+TablesUpdate::updateMedicines();
+TablesUpdate::updateDeliveries();
+
 $smarty->display("../../frontend/html/mainManagerPage.tpl");

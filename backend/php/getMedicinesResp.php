@@ -95,7 +95,8 @@ else if(isset($_POST["action"]) && $_POST["action"]=="getMedsIssue"){
     $sql = "SELECT medicines.idMedicine, medName, COALESCE(SUM(storageUnitAmount),0) AS max 
             FROM medicines INNER JOIN medicinegroups ON medicines.idMedicine = medicinegroups.idMedicine
             GROUP BY medicines.idMedicine
-            HAVING COALESCE(SUM(storageUnitAmount),0) > 0";
+            HAVING COALESCE(SUM(storageUnitAmount),0) > 0
+            ORDER BY medName";
     $result = [];
     foreach ($pdo->query($sql) as $row){
         $result[] = ["id"=>$row["idMedicine"],

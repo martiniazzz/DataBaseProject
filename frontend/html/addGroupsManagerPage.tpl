@@ -70,8 +70,6 @@
     </div>
 </div>
 <script type="text/javascript" src="../../frontend/js/pages.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="../../frontend/assets/libs/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="../../frontend/js/managerPage.js"></script>
 <script type="text/javascript" src="../../frontend/js/getGroups.js"></script>
 <script type="text/javascript" src="../../frontend/js/managerHome.js"></script>

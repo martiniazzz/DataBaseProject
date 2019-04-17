@@ -217,7 +217,20 @@ function showContent(data) {
         t.innerText = "Групи:";
         let groups = document.createElement("div");
         groups.className = "med-info-row";
-        groups.innerText = e["groups"]===""?"Груп немає":e["groups"];
+        groups.innerText = e["groups"]===[]?"Груп немає":"";
+        e["groups"].forEach(function (gr) {
+            let hhhh = document.createElement("div");
+            hhhh.innerText = "Номер групи: "+gr["id"]+"\n"+
+            "Стелаж: "+gr["rack"]+"\n"+
+            "Полиця: "+gr["shelf"]+"\n"+
+            "Дата виготовлення: "+gr["ptDate"]+"\n"+
+            "Придатний до: "+gr["due"]+"\n"+
+            "Кількість при поставці: "+gr["delAm"]+"\n"+
+            "Кількість одиниць на складі: "+gr["am"]+"\n"+
+            "Ціна за одиницю: "+gr["price"]+"\n"+
+            "Вартість: "+gr["total"]+"\n\n";
+            groups.appendChild(hhhh);
+        });
 
         info.appendChild(prov);
         info.appendChild(desc);

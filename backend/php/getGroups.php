@@ -37,9 +37,9 @@ else if(isset($_POST["groupAction"]) && $_POST["groupAction"]=="addGroup"){
 
     $date = date('Y-m-d', strtotime("+".$toadd." months", strtotime($pd)));
 
-    $sql = "INSERT INTO medicinegroups (shelfNo,rackNo,productdate, dueTo,delPackAmount, storageUnitAmount, pricePerPack, isFinished, idMedicine, idDelivery) VALUES (?,?,?,?,?,?,?,?,?,?);";
+    $sql = "INSERT INTO medicinegroups (shelfNo,rackNo,productdate, dueTo,delPackAmount, storageUnitAmount, pricePerPack, idMedicine, idDelivery) VALUES (?,?,?,?,?,?,?,?,?);";
     $stmt= $pdo->prepare($sql);
-    $stmt->execute([$s, $r, $pd, $date, $am, 0, $pr, false, $med, $id]);
+    $stmt->execute([$s, $r, $pd, $date, $am, 0, $pr, $med, $id]);
     Database::disconnect();
 
     TablesUpdate::updateMedicines();
@@ -68,9 +68,9 @@ else if(isset($_POST["groupAction"]) && $_POST["groupAction"]=="updateGroup"){
 
     $date = date('Y-m-d', strtotime("+".$toadd." months", strtotime($pd)));
 
-    $sql = "UPDATE medicinegroups SET shelfNo=?,rackNo=?,productdate=?,dueTo=?,delPackAmount=?,storageUnitAmount=?,pricePerPack=?,isFinished=?,idMedicine=?, idDelivery=? WHERE idGroup=?;";
+    $sql = "UPDATE medicinegroups SET shelfNo=?,rackNo=?,productdate=?,dueTo=?,delPackAmount=?,storageUnitAmount=?,pricePerPack=?,idMedicine=?, idDelivery=? WHERE idGroup=?;";
     $stmt= $pdo->prepare($sql);
-    $stmt->execute([$s, $r, $pd, $date, $am, 0, $pr, false, $med, $id,$gid]);
+    $stmt->execute([$s, $r, $pd, $date, $am, 0, $pr, $med, $id,$gid]);
     Database::disconnect();
 
     TablesUpdate::updateMedicines();

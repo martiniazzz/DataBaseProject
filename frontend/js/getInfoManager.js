@@ -343,6 +343,26 @@ function showStatMed(data) {
     box.appendChild(node5);
     box.appendChild(node6);
 
+    let node7 = document.createElement("div");
+    node7.className = "stat-holder col-md-12";
+    let v7 = document.createElement("div");
+    v7.className = "stat-header";
+    v7.innerText = "Медикаменти, що видавався на всі відділи";
+    node7.appendChild(v7);
+    let b7 = document.createElement("div");
+    b7.className = "stat-inner";
+    node7.appendChild(b7);
+    data["allDeps"].forEach(function (e) {
+        let q = document.createElement("div");
+        q.className = "stat-in";
+        q.innerText = e["name"];
+
+        b7.appendChild(q);
+
+    });
+
+    box.appendChild(node7);
+
     data["stat"].forEach(function (e) {
         let node = document.createElement("div");
         node.className = "stat-holder col-md-6";
@@ -480,8 +500,27 @@ function showStatProv(data) {
 
     });
 
+    let node3 = document.createElement("div");
+    node3.className = "stat-holder col-md-12";
+    let v3 = document.createElement("div");
+    v3.className = "stat-header";
+    v3.innerText = "Постачальники, що постачали усі медикаменти";
+    node3.appendChild(v3);
+    let b3 = document.createElement("div");
+    b3.className = "stat-inner";
+    node3.appendChild(b3);
+    data["provAllMeds"].forEach(function (e) {
+        let q = document.createElement("div");
+        q.className = "stat-in";
+        q.innerText = e["name"];
+
+        b3.appendChild(q);
+
+    });
+
     box.appendChild(node1);
     box.appendChild(node2);
+    box.appendChild(node3);
 
     data["stat"].forEach(function (e) {
         let node3 = document.createElement("div");

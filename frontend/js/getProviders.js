@@ -212,7 +212,7 @@ function showContent(data) {
         header.appendChild(title);
         header.appendChild(phones);
         header.appendChild(edit);
-        header.appendChild(del);
+        //header.appendChild(del);
 
         let info = document.createElement("div");
         info.className = "med-info";

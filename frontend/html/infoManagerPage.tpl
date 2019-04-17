@@ -9,6 +9,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+<body>
 <link href='../../frontend/css/report.css' rel='stylesheet' type='text/css'/>
 <div class="page-holder">
     {include "../../frontend/html/managerHeader.tpl"}
